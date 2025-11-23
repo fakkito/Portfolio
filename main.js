@@ -117,7 +117,7 @@ const modalContentEN = `<h4>1. Collection</h4><p>Data recorded: Name, Email, Mes
 
 // --- VARIABLES GLOBALES ---
 let currentLang = 'en'; // Anglais par défaut
-let isDark = false;
+let isDark = true;
 
 // --- GESTION THÈME ---
 function toggleTheme() {
@@ -158,11 +158,31 @@ function updateTexts() {
     if (modalBody) modalBody.innerHTML = currentLang === 'fr' ? modalContentFR : modalContentEN;
 }
 
-// --- INITIALISATION ---
+// --- INIT AU CHARGEMENT DE LA PAGE ---
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Thème
+    
+    // 1. Vérifier le thème (Logique inversée pour Dark par défaut)
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') { isDark = true; applyTheme(); }
+    const icon = document.getElementById('theme-icon');
+
+    // Si l'utilisateur a PRÉCÉDEMMENT choisi "light", on force le mode clair
+    if (savedTheme === 'light') {
+        isDark = false;
+        document.body.removeAttribute('data-theme'); // Enlève le mode sombre
+        if(icon) {
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+        }
+    } 
+    // Sinon (c'est la première visite OU il a choisi dark), on reste en Dark (défini dans le HTML)
+    else {
+        isDark = true;
+        // On s'assure que l'icône est bien un soleil
+        if(icon) {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+    }
     
     // 2. Langue (Applique EN par défaut et met à jour le texte)
     updateTexts();
