@@ -66,7 +66,7 @@ const translations = {
         "hero-badge": "Portfolio 2025", 
         "hero-greeting": "Hello, I am", 
         "hero-name": "Achille Dutel",
-        "hero-role": "Full Stack <span class='gradient-text'>Developer</span>",
+        "hero-role": "<span class='gradient-text'>Full Stack </span>Developer",
         "hero-desc": "Computer Science student (BUT). I design and develop efficient and intuitive web applications.",
         "hero-location": "Annecy / Valence / Switzerland",
         "hero-permit": "Driving License",
