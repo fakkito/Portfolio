@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details - Achille Dutel</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="top-header">
+        <div class="brand"><span class="brand-name">Achille Dutel</span></div>
+        <div class="header-tools">
+            <a href="index.html#projets" class="tool-btn">
+                <i class="fas fa-arrow-left"></i> <span id="txt-back">Back</span>
+            </a>
+            <div class="divider"></div>
+            <button class="tool-btn" onclick="toggleLanguage()">
+                <span class="icon">🌍</span> <span id="txt-lang">FR</span>
+            </button>
+            <button class="tool-btn theme-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="project-container">
+
+            <div class="project-hero">
+                <span class="project-tag" id="p-tag">Game Development</span>
+                <h1 class="project-title" id="p-title">2D Platformer Game</h1>
+                <p class="project-date" id="p-date">December 2024</p>
+            </div>
+
+            <div class="project-gallery">
+                <div class="gallery-main">
+                    <img id="mainImage" src="Images/Game/page-jeu.png" alt="Main Preview">
+                </div>
+                <div class="gallery-thumbs">
+                    <div class="thumb active" onclick="changeImage(this, 'Images/Game/page-jeu.png')">
+                        <img src="Images/Game/page-jeu.png" alt="preview 1">
+                    </div>
+                    <div class="thumb" onclick="changeImage(this, 'Images/Game/page-accueil.png')">
+                        <img src="Images/Game/page-accueil.png" alt="preview 2">
+                    </div>
+                    <div class="thumb" onclick="changeImage(this, 'Images/Game/page-pause.png')">
+                        <img src="Images/Game/page-pause.png" alt="preview 3">
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-content-split">
+                <div class="project-main">
+                    <div class="content-block">
+                        <h2 id="p-subtitle-1">Project Overview</h2>
+                        <p id="p-desc-1">Development of a 2D video game inspired by the classics (Mario Bros type). This project focused on object-oriented programming and game physics logic.</p>
+                    </div>
+                    <div class="content-block">
+                        <h2 id="p-subtitle-2">Technical Challenges</h2>
+                        <ul id="p-list-1">
+                            <li>Implemented gameplay logic and player physics (gravity, jump).</li>
+                            <li>Created animated sprites and managed animations states.</li>
+                            <li>Handled collision detection between player and environment.</li>
+                            <li>Developed a scrolling background system for level progression.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="project-sidebar">
+                    <div class="tech-card">
+                        <h3 id="p-tech-title">Technologies</h3>
+                        <div class="tech-list">
+                            <span class="tech-badge">C#</span>
+                            <span class="tech-badge">Game Loop</span>
+                            <span class="tech-badge">Physics Engine</span>
+                            <span class="tech-badge">OOP</span>
+                        </div>
+                    </div>
+                    <div class="tech-card mt-30">
+                        <h3 id="p-res-title">Ressources</h3>
+                        <a href="https://github.com/fakkito/SAE-1.01_1.02" target="_blank" class="github-project-btn">
+                            <i class="fab fa-github"></i> <span id="p-btn-code">See Code</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content"><p>&copy; 2025 Achille Dutel.</p></div>
+    </footer>
+
+    <script>
+        const projectTranslations = {
+            fr: {
+                "txt-back": "Retour", "txt-lang": "EN", "link-back-proj": "Retour aux projets",
+                "p-tag": "Développement Jeu Vidéo",
+                "p-title": "Jeu de Plateforme 2D",
+                "p-date": "Décembre 2024",
+                "p-subtitle-1": "Aperçu du projet",
+                "p-desc-1": "Développement d'un jeu vidéo 2D inspiré des classiques (type Mario Bros). Ce projet s'est concentré sur la programmation orientée objet et la logique physique.",
+                "p-subtitle-2": "Défis Techniques",
+                "p-list-1": `
+                    <li>Implémentation de la logique de jeu et physique (gravité, sauts).</li>
+                    <li>Création de sprites animés et gestion des états d'animation.</li>
+                    <li>Gestion des collisions entre le joueur et l'environnement.</li>
+                    <li>Développement d'un système de défilement (scrolling) pour la progression.</li>`,
+                "p-tech-title": "Technologies", "p-res-title": "Ressources", "p-btn-code": "Voir le code"
+            },
+            en: {
+                "txt-back": "Back", "txt-lang": "FR", "link-back-proj": "Back to Projects",
+                "p-tag": "Game Development",
+                "p-title": "2D Platformer Game",
+                "p-date": "December 2024",
+                "p-subtitle-1": "Project Overview",
+                "p-desc-1": "Development of a 2D video game inspired by the classics (Mario Bros type). This project focused on object-oriented programming and game physics logic.",
+                "p-subtitle-2": "Technical Challenges",
+                "p-list-1": `
+                    <li>Implemented gameplay logic and player physics (gravity, jump).</li>
+                    <li>Created animated sprites and managed animations states.</li>
+                    <li>Handled collision detection between player and environment.</li>
+                    <li>Developed a scrolling background system for level progression.</li>`,
+                "p-tech-title": "Technologies", "p-res-title": "Resources", "p-btn-code": "See Code"
+            }
+        };
+
+        let currentLang = 'en';
+        let isDark = false;
+
+        if (localStorage.getItem('theme') === 'dark') { isDark = true; applyTheme(); }
+
+        function toggleTheme() { isDark = !isDark; applyTheme(); }
+        function applyTheme() {
+            const icon = document.getElementById('theme-icon');
+            if (isDark) { document.body.setAttribute('data-theme', 'dark'); icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); localStorage.setItem('theme', 'dark'); }
+            else { document.body.removeAttribute('data-theme'); icon.classList.remove('fa-sun'); icon.classList.add('fa-moon'); localStorage.setItem('theme', 'light'); }
+        }
+
+        function toggleLanguage() { currentLang = currentLang === 'fr' ? 'en' : 'fr'; updateProjectTexts(); }
+        function updateProjectTexts() {
+            const texts = projectTranslations[currentLang];
+            for (const key in texts) {
+                const el = document.getElementById(key);
+                if (el) el.innerHTML = texts[key];
+            }
+        }
+
+        function changeImage(element, imageSrc) {
+            const mainImg = document.getElementById('mainImage');
+            mainImg.style.opacity = '0.8';
+            setTimeout(() => { mainImg.src = imageSrc; mainImg.style.opacity = '1'; }, 150);
+            document.querySelectorAll('.thumb').forEach(thumb => thumb.classList.remove('active'));
+            element.classList.add('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details - Achille Dutel</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="top-header">
+        <div class="brand"><span class="brand-name">Achille Dutel</span></div>
+        <div class="header-tools">
+            <a href="index.html#projets" class="tool-btn">
+                <i class="fas fa-arrow-left"></i> <span id="txt-back">Back</span>
+            </a>
+            <div class="divider"></div>
+            <button class="tool-btn" onclick="toggleLanguage()">
+                <span class="icon">🌍</span> <span id="txt-lang">FR</span>
+            </button>
+            <button class="tool-btn theme-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="project-container">
+
+            <div class="project-hero">
+                <span class="project-tag" id="p-tag">Web Application</span>
+                <span class="project-tag" id="p-tag">Currently in Progress</span>
+                <h1 class="project-title" id="p-title">Web App & Database Management</h1>
+                <p class="project-date" id="p-date">October 2025 - January 2026</p>
+            </div>
+
+            <div class="project-gallery">
+                <div class="gallery-main">
+                    <img id="mainImage" src="projet-web.jpg" alt="Main Preview">
+                </div>
+                <div class="gallery-thumbs">
+                    <div class="thumb active" onclick="changeImage(this, 'projet-web.jpg')">
+                        <img src="projet-web.jpg" alt="preview 1">
+                    </div>
+                    <div class="thumb" onclick="changeImage(this, 'projet-web-2.jpg')">
+                        <img src="projet-web-2.jpg" alt="preview 2">
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-content-split">
+                <div class="project-main">
+                    <div class="content-block">
+                        <h2 id="p-subtitle-1">Project Overview</h2>
+                        <p id="p-desc-1">Development of a complete web application within a team of 4 people. The goal was to design a robust architecture combining a Laravel back-end with complex data management.</p>
+                    </div>
+                    <div class="content-block">
+                        <h2 id="p-subtitle-2">Key Achievements</h2>
+                        <ul id="p-list-1">
+                            <li>Designed complex data models and BPMN diagrams for workflow logic.</li>
+                            <li>Implemented cryptography modules for secure communication.</li>
+                            <li>Created Power BI dashboards for data visualization and analytics.</li>
+                            <li>Managed the project using the Scrum agile methodology.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="project-sidebar">
+                    <div class="tech-card">
+                        <h3 id="p-tech-title">Technologies</h3>
+                        <div class="tech-list">
+                            <span class="tech-badge">Laravel</span>
+                            <span class="tech-badge">PHP</span>
+                            <span class="tech-badge">BPMN</span>
+                            <span class="tech-badge">Power BI</span>
+                            <span class="tech-badge">Scrum</span>
+                        </div>
+                    </div>
+                    </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content"><p>&copy; 2025 Achille Dutel.</p></div>
+    </footer>
+
+    <script>
+        const projectTranslations = {
+            fr: {
+                "txt-back": "Retour", "txt-lang": "EN", "link-back-proj": "Retour aux projets",
+                "p-tag": "Application Web",
+                "p-title": "App Web & Gestion de Données",
+                "p-date": "Octobre 2025 - Janvier 2026",
+                "p-subtitle-1": "Aperçu du projet",
+                "p-desc-1": "Développement d'une application web complète en équipe de 4 personnes. L'objectif était de concevoir une architecture robuste combinant un back-end Laravel avec une gestion de données complexe.",
+                "p-subtitle-2": "Réalisations Clés",
+                "p-list-1": `
+                    <li>Conception de modèles de données complexes et diagrammes BPMN.</li>
+                    <li>Implémentation de modules de cryptographie pour sécuriser les échanges.</li>
+                    <li>Création de tableaux de bord Power BI pour l'analyse de données.</li>
+                    <li>Gestion du projet via la méthode agile Scrum.</li>`,
+                "p-tech-title": "Technologies"
+            },
+            en: {
+                "txt-back": "Back", "txt-lang": "FR", "link-back-proj": "Back to Projects",
+                "p-tag": "Web Application",
+                "p-title": "Web App & Database Management",
+                "p-date": "October 2025 - January 2026",
+                "p-subtitle-1": "Project Overview",
+                "p-desc-1": "Development of a complete web application within a team of 4 people. The goal was to design a robust architecture combining a Laravel back-end with complex data management.",
+                "p-subtitle-2": "Key Achievements",
+                "p-list-1": `
+                    <li>Designed complex data models and BPMN diagrams for workflow logic.</li>
+                    <li>Implemented cryptography modules for secure communication.</li>
+                    <li>Created Power BI dashboards for data visualization and analytics.</li>
+                    <li>Managed the project using the Scrum agile methodology.</li>`,
+                "p-tech-title": "Technologies"
+            }
+        };
+
+        let currentLang = 'en';
+        let isDark = false;
+
+        if (localStorage.getItem('theme') === 'dark') { isDark = true; applyTheme(); }
+
+        function toggleTheme() { isDark = !isDark; applyTheme(); }
+        function applyTheme() {
+            const icon = document.getElementById('theme-icon');
+            if (isDark) { document.body.setAttribute('data-theme', 'dark'); icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); localStorage.setItem('theme', 'dark'); }
+            else { document.body.removeAttribute('data-theme'); icon.classList.remove('fa-sun'); icon.classList.add('fa-moon'); localStorage.setItem('theme', 'light'); }
+        }
+
+        function toggleLanguage() { currentLang = currentLang === 'fr' ? 'en' : 'fr'; updateProjectTexts(); }
+        function updateProjectTexts() {
+            const texts = projectTranslations[currentLang];
+            for (const key in texts) {
+                const el = document.getElementById(key);
+                if (el) el.innerHTML = texts[key];
+            }
+        }
+
+        function changeImage(element, imageSrc) {
+            const mainImg = document.getElementById('mainImage');
+            mainImg.style.opacity = '0.8';
+            setTimeout(() => { mainImg.src = imageSrc; mainImg.style.opacity = '1'; }, 150);
+            document.querySelectorAll('.thumb').forEach(thumb => thumb.classList.remove('active'));
+            element.classList.add('active');
+        }
+    </script>
+</body>
+</html>

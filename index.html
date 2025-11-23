@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achille Dutel - Portfolio</title>
+    <meta name="description" content="Portfolio d'Achille Dutel, étudiant en informatique et développeur Full Stack (C#, Laravel, Web). Découvrez mes projets et mon parcours.">
+    <meta name="keywords" content="Achille Dutel, Portfolio, Développeur Web, Full Stack, C#, Laravel, Étudiant Informatique, Annecy">
+    <meta name="author" content="Achille Dutel">
+    <meta property="og:title" content="Achille Dutel - Portfolio Développeur">
+    <meta property="og:description" content="Découvrez mes projets en développement web et logiciel.">
+    <meta property="og:image" content="Images/Me/Photo de moi.jpg"> <meta property="og:url" content="https://ton-pseudo.github.io"> <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="brand">
+            <span class="brand-name">Achille Dutel</span>
+        </div>
+        <div class="header-tools">
+            
+        <div class="cv-wrapper">
+        <button class="tool-btn" onclick="toggleCvMenu()" id="btn-cv-trigger">
+        <span class="icon"><i class="fas fa-download"></i></span> 
+        <span id="txt-cv">CV</span>
+        <i class="fas fa-chevron-down arrow-down"></i>
+        </button>
+    
+        <div class="cv-dropdown" id="cv-menu">
+        <a href="CV_Achille_Dutel_FR.pdf" download="CV_Achille_Dutel_FR" class="cv-item">
+            <span class="flag">🇫🇷</span> FR
+        </a>
+        
+        <a href="CV_Achille_Dutel_ENG.pdf" download="CV_Achille_Dutel_ENG" class="cv-item">
+            <span class="flag">🇬🇧</span> EN
+        </a>
+        </div>
+        </div>
+        
+            <div class="divider"></div>
+            
+            <button class="tool-btn" onclick="toggleLanguage()">
+                <span class="icon">🌍</span> 
+                <span id="txt-lang">FR</span>
+            </button>
+
+            <button class="tool-btn theme-btn" onclick="toggleTheme()" aria-label="Changer de thème">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+        </div>
+    </header>
+
+    <nav class="floating-nav">
+        <button class="nav-item active" onclick="scrollToSection('accueil')" id="nav-home">Home</button>
+        <button class="nav-item" onclick="scrollToSection('projets')" id="nav-projects">Projects</button>
+        <button class="nav-item" onclick="scrollToSection('resume')" id="nav-resume">Resume</button>
+        <button class="nav-item" onclick="scrollToSection('apropos')" id="nav-about">About</button>
+        <button class="nav-item" onclick="scrollToSection('contact')" id="nav-contact">Contact</button>
+    </nav>
+
+    <main class="main-content">
+        
+        <section id="accueil" class="view active">
+            <div class="hero-container hero-split">
+                <div class="hero-text">
+                    <span class="greeting" id="hero-greeting">Bonjour, je suis</span>
+                    <h1 class="hero-name">Achille Dutel</h1>
+                    <h2 class="hero-role" id="hero-role">Full Stack <span class="gradient-text">Developer</span></h2>
+                    <p class="hero-desc" id="hero-desc">
+                        Étudiant en Informatique (BUT). Je conçois et développe des applications web performantes et intuitives.
+                    </p>
+                    <div class="hero-meta">
+                        <span class="meta-item"><i class="fas fa-map-marker-alt icon-box"></i> <span id="hero-location">Annecy / Valence / Suisse</span></span>
+                        <span class="meta-item"><i class="fas fa-car icon-box"></i> <span id="hero-permit">Permis B</span></span>
+                    </div>
+                    <div class="hero-actions">
+                        <button onclick="scrollToSection('projets')" class="primary-btn" id="btn-hero-projects">Voir mes projets</button>
+                        <button onclick="scrollToSection('contact')" class="secondary-btn" id="btn-hero-contact">Me contacter</button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="profile-circle">
+                        <img src="Images/Me/Photo de moi.jpg" alt="Photo de profil">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projets" class="view">
+            <div class="section-header"><h2 id="title-projects">Mes Projets</h2></div>
+            <div class="carousel-scene">
+                <div class="carousel-wrapper">
+                    <div class="carousel-card active">
+                        <a href="in-progress.html" class="card-link">
+                            <div class="card-visual icon-bg-1">💻</div>
+                            <div class="card-body">
+                                <h3 id="proj1-title">App Web & BDD</h3>
+                                <p id="proj1-desc">Laravel, Modèles de données</p>
+                                <span class="link-text" id="link-view-1">Voir le projet &rarr;</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="carousel-card next">
+                        <a href="projet-traiteur.html" class="card-link">
+                            <div class="card-visual icon-bg-2">🍖</div>
+                            <div class="card-body">
+                                <h3 id="proj2-title">Gestion Commandes</h3>
+                                <p id="proj2-desc">App C# (WPF/XAML)</p>
+                                <span class="link-text" id="link-view-2">Voir le projet &rarr;</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="carousel-card">
+                        <a href="projet-jeu.html" class="card-link">
+                            <div class="card-visual icon-bg-3">🎮</div>
+                            <div class="card-body">
+                                <h3 id="proj3-title">Jeu Vidéo 2D</h3>
+                                <p id="proj3-desc">Style Mario Bros (C#)</p>
+                                <span class="link-text" id="link-view-3">Voir le projet &rarr;</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="carousel-card prev">
+                        <a href="projet-42.html" class="card-link">
+                            <div class="card-visual icon-bg-4"><i class="fas fa-code"></i></div>
+                            <div class="card-body">
+                                <h3 id="proj4-title">Piscine École 42</h3>
+                                <p id="proj4-desc">Bootcamp intensif C</p>
+                                <span class="link-text" id="link-view-4">Voir le projet &rarr;</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="carousel-navigation">
+                    <button class="nav-arrow" onclick="moveCarousel(-1)">❮</button>
+                    <div class="dots-container" id="dotsContainer">
+                        <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                    </div>
+                    <button class="nav-arrow" onclick="moveCarousel(1)">❯</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="resume" class="view">
+    <div class="section-header">
+        <h2 id="title-resume">Mon Parcours</h2>
+    </div>
+
+    <div class="resume-wrapper">
+        
+        <div class="resume-card">
+            <h3 class="resume-category"><i class="fas fa-graduation-cap"></i> <span id="cat-edu">Formation</span></h3>
+            <div class="resume-list">
+                <div class="resume-item">
+                    <span class="resume-date" id="date-usmb">2024 - 2027</span>
+                    <h4 id="title-usmb">BUT Informatique</h4>
+                    <p class="resume-place">USMB Annecy</p>
+                    <p class="resume-desc" id="desc-usmb">Diplôme Universitaire de Technologie.</p>
+                </div>
+                <div class="resume-item">
+                    <span class="resume-date" id="date-42">Juillet 2025</span>
+                    <h4 id="title-42">École 42 "Piscine"</h4>
+                    <p class="resume-place">Lyon</p>
+                    <p class="resume-desc" id="desc-42">Bootcamp intensif C (4 semaines).</p>
+                </div>
+                <div class="resume-item">
+                    <span class="resume-date">2024</span>
+                    <h4 id="title-hs">Baccalauréat STI2D</h4>
+                    <p class="resume-place">Lycée du Dauphiné</p>
+                    <p class="resume-desc" id="desc-hs">Option SIN, Mention.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="resume-card">
+            <h3 class="resume-category"><i class="fas fa-briefcase"></i> <span id="cat-exp">Expériences</span></h3>
+            <div class="resume-list">
+                <div class="resume-item">
+                    <span class="resume-date" id="date-exp1">Oct 2025 - Jan 2026</span>
+                    <h4 id="title-exp1">Projet Web & BDD</h4>
+                    <p class="resume-desc" id="desc-exp1">App Laravel, Modélisation, Scrum.</p>
+                </div>
+                <div class="resume-item">
+                    <span class="resume-date" id="date-exp2">Mai - Juin 2025</span>
+                    <h4 id="title-exp2">App Gestion Traiteur</h4>
+                    <p class="resume-desc" id="desc-exp2">C# (WPF), Stocks & Commandes.</p>
+                </div>
+                <div class="resume-item">
+                    <span class="resume-date" id="date-exp3">Déc 2024</span>
+                    <h4 id="title-exp3">Jeu Vidéo 2D</h4>
+                    <p class="resume-desc" id="desc-exp3">C#, Physique, Animations.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="resume-card">
+            <h3 class="resume-category"><i class="fas fa-star"></i> <span id="cat-misc">Atouts & Langues</span></h3>
+            <div class="resume-list">
+                <div class="resume-item">
+                    <h4><i class="fas fa-language"></i> <span id="lbl-lang">Langues</span></h4>
+                    <ul class="resume-bullet-list">
+                        <li id="lang-fr">Français : Natif</li>
+                        <li id="lang-en">Anglais : Intermédiaire (B2)</li>
+                    </ul>
+                </div>
+                <div class="resume-item">
+                    <h4><i class="fas fa-user-check"></i> Soft Skills</h4>
+                    <ul class="resume-bullet-list">
+                        <li id="soft-1">Fiable & Constant</li>
+                        <li id="soft-2">Communication</li>
+                        <li id="soft-3">Esprit d'équipe</li>
+                    </ul>
+                </div>
+                <div class="resume-item">
+                    <h4><i class="fas fa-heart"></i> <span id="lbl-hobby">Intérêts</span></h4>
+                    <p class="resume-desc" id="desc-hobby">Voyages, Volley-ball, Sport.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</section>
+
+        <section id="competences" class="view">
+            <div class="section-header"><h2 id="title-skills">Mes Compétences</h2></div>
+            <div class="skills-wrapper">
+                <div class="skill-card">
+                    <h3 class="skill-category" id="cat-web">Web</h3>
+                    <div class="skill-list">
+                        <div class="skill-item"><span class="skill-name">HTML / CSS</span><div class="progress-track"><div class="progress-fill" style="width: 90%;"></div></div></div>
+                        <div class="skill-item"><span class="skill-name">JS</span><div class="progress-track"><div class="progress-fill" style="width: 65%;"></div></div></div>
+                        <div class="skill-item"><span class="skill-name">Laravel / PHP</span><div class="progress-track"><div class="progress-fill" style="width: 75%;"></div></div></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3 class="skill-category" id="cat-db">Base de données</h3>
+                    <div class="skill-list">
+                        <div class="skill-item"><span class="skill-name">PostgreSQL</span><div class="progress-track"><div class="progress-fill" style="width: 80%;"></div></div></div>
+                        <div class="skill-item"><span class="skill-name">Oracle / PLSQL</span><div class="progress-track"><div class="progress-fill" style="width: 70%;"></div></div></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3 class="skill-category" id="cat-prog">Programmation</h3>
+                    <div class="skill-list">
+                        <div class="skill-item"><span class="skill-name">C# / .NET</span><div class="progress-track"><div class="progress-fill" style="width: 95%;"></div></div></div>
+                        <div class="skill-item"><span class="skill-name">Python</span><div class="progress-track"><div class="progress-fill" style="width: 60%;"></div></div></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3 class="skill-category" id="cat-tools">Outils</h3>
+                    <div class="skill-list">
+                        <div class="skill-item"><span class="skill-name">Git / GitHub</span><div class="progress-track"><div class="progress-fill" style="width: 90%;"></div></div></div>
+                        <div class="skill-item"><span class="skill-name">Visual Studio</span><div class="progress-track"><div class="progress-fill" style="width: 95%;"></div></div></div>
+                        <div class="skill-item"><span class="skill-name" id="skill-agile">Méthode Agile</span><div class="progress-track"><div class="progress-fill" style="width: 80%;"></div></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="cv-download-container">
+                <div class="cv-wrapper-bottom">
+                    <button class="primary-btn" onclick="toggleCvMenuBottom()" id="btn-cv-bottom">
+                        <i class="fas fa-download"></i> 
+                        <span id="btn-dl-text">Download Full Resume</span> 
+                        <i class="fas fa-chevron-down" style="margin-left: 10px; font-size: 0.8em;"></i>
+                    </button>
+
+                    <div class="cv-dropdown" id="cv-menu-bottom">
+                        <a href="CV_Achille_DUTEL_FR.pdf" download class="cv-item">
+                            <span class="flag">🇫🇷</span> Français
+                        </a>
+                        <a href="CV_Achille_DUTEL_ENG.pdf" download class="cv-item">
+                            <span class="flag">🇬🇧</span> English
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="apropos" class="view">
+            <div class="about-card">
+                <div class="about-left">
+                    <div class="avatar-circle"><span>👤</span></div>
+                </div>
+                <div class="about-right">
+                    <h2 id="title-about">À propos de moi</h2>
+                    <p id="about-p1">Actuellement étudiant à l'Université USMB d'Annecy. Je suis fiable, constant et doté d'un excellent esprit d'équipe.</p>
+                    <p id="about-p2">Je recherche un stage du 6 mai au 28 juin 2026 pour appliquer mes compétences en développement logiciel et innover.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="view">
+            <div class="section-header"><h2 id="title-contact">Contactez-moi</h2></div>
+            <div class="contact-split-container">
+                <div class="contact-card info-card">
+                    <h3 id="contact-coords">Mes Réseaux</h3>
+                    <div class="info-row">
+                        <div class="info-icon brand-linkedin"><i class="fab fa-linkedin-in"></i></div>
+                        <div class="info-text"><span class="label">LinkedIn</span><a href="https://www.linkedin.com/in/achille-dutel-a74753334/" target="_blank" class="value" id="link-linkedin">Voir mon profil</a></div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-icon brand-github"><i class="fab fa-github"></i></div>
+                        <div class="info-text"><span class="label">GitHub</span><a href="https://github.com/fakkito" target="_blank" class="value" id="link-github">Voir mes repos</a></div>
+                    </div>
+                </div>
+                <div class="contact-card form-card">
+                    <form id="contact-form" action="https://formspree.io/f/mqajjvbz" method="POST" onsubmit="handleSubmit(event)">
+    
+                        <div class="form-group-block">
+                            <label for="name" id="lbl-name">Nom</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                    
+                        <div class="form-group-block">
+                            <label for="email" id="lbl-email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    
+                        <div class="form-group-block">
+                            <label for="message" id="lbl-message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                    
+                        <input type="text" name="_gotcha" style="display:none">
+                    
+                        <button type="submit" class="primary-btn" id="btn-send">Envoyer</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Achille Dutel.</p>
+            <button onclick="openRgpdModal()" class="legal-btn" id="btn-rgpd">Données Personnelles & RGPD</button>
+        </div>
+    </footer>
+
+    <div id="rgpd-modal" class="modal-overlay" onclick="closeRgpdModal(event)">
+        <div class="modal-card">
+            <button class="close-btn" onclick="closeRgpdModal(event)">×</button>
+            <h3 id="modal-title">Politique de Confidentialité</h3>
+            <div class="modal-scroll-content" id="modal-content"></div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

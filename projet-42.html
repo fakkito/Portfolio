@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details - Achille Dutel</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="top-header">
+        <div class="brand"><span class="brand-name">Achille Dutel</span></div>
+        <div class="header-tools">
+            <a href="index.html#projets" class="tool-btn">
+                <i class="fas fa-arrow-left"></i> 
+                <span id="txt-back">Back</span>
+            </a>
+            <div class="divider"></div>
+            <button class="tool-btn" onclick="toggleLanguage()">
+                <span class="icon">🌍</span> <span id="txt-lang">FR</span>
+            </button>
+            <button class="tool-btn theme-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="project-container">
+            
+            <div class="project-hero">
+                <span class="project-tag" id="p-tag">Intensive Bootcamp</span>
+                <h1 class="project-title" id="p-title">École 42 "Piscine"</h1>
+                <p class="project-date" id="p-date">July 2025</p>
+            </div>
+
+            <div class="project-banner" style="background: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%); color: white;">
+                <i class="fas fa-code"></i>
+            </div>
+
+            <div class="project-content-split">
+                <div class="project-main">
+                    <div class="content-block">
+                        <h2 id="p-subtitle-1">Experience Overview</h2>
+                        <p id="p-desc-1">Completed the "Piscine" at École 42 Lyon. A 4-week intensive coding bootcamp designed to test resilience, autonomy, and peer-learning capabilities.</p>
+                    </div>
+                    <div class="content-block">
+                        <h2 id="p-subtitle-2">Activities & Skills</h2>
+                        <ul id="p-list-1">
+                            <li>Daily coding modules in C language (low-level programming).</li>
+                            <li>Peer-to-peer evaluations and code reviews.</li>
+                            <li>Weekly exams under strict time constraints (4 to 8 hours).</li>
+                            <li>Weekend team projects (Rush) requiring collaboration and git management.</li>
+                            <li>Developed strong problem-solving skills and algorithmic thinking.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="project-sidebar">
+                    <div class="tech-card">
+                        <h3 id="p-tech-title">Technologies</h3>
+                        <div class="tech-list">
+                            <span class="tech-badge">C Language</span>
+                            <span class="tech-badge">Shell / Bash</span>
+                            <span class="tech-badge">Git</span>
+                            <span class="tech-badge">Algorithms</span>
+                            <span class="tech-badge">Unix</span>
+                        </div>
+                    </div>
+                    <div class="tech-card mt-30">
+                        <h3 id="p-res-title">Ressources</h3>
+                        <a href="https://github.com/fakkito/Piscine-42" target="_blank" class="github-project-btn">
+                            <i class="fab fa-github"></i> <span id="p-btn-code">See Code</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content"><p>&copy; 2025 Achille Dutel.</p></div>
+    </footer>
+    
+    <script>
+        // --- TRADUCTIONS SPECIFIQUES A CE PROJET ---
+        const projectTranslations = {
+            fr: {
+                "txt-back": "Retour",
+                "txt-lang": "EN",
+                "link-back-proj": "Retour aux projets",
+                
+                // Contenu du projet
+                "p-tag": "Bootcamp Intensif",
+                "p-title": "Piscine École 42",
+                "p-date": "Juillet 2025",
+                "p-subtitle-1": "Aperçu de l'expérience",
+                "p-desc-1": "Réalisation de la 'Piscine' à l'École 42 Lyon. Un bootcamp intensif de 4 semaines conçu pour tester la résilience, l'autonomie et l'apprentissage par les pairs.",
+                "p-subtitle-2": "Activités & Compétences",
+                "p-list-1": `
+                    <li>Modules quotidiens en langage C (programmation bas niveau).</li>
+                    <li>Évaluations par les pairs (peer-learning) et revues de code.</li>
+                    <li>Examens hebdomadaires sous contrainte de temps stricte (4 à 8h).</li>
+                    <li>Projets d'équipe le week-end (Rush) nécessitant collaboration et Git.</li>
+                    <li>Développement d'une forte capacité de résolution de problèmes.</li>
+                `,
+                "p-tech-title": "Technologies",
+                "p-res-title": "Ressources",
+                "p-btn-code": "Voir le code"
+            },
+            en: {
+                "txt-back": "Back",
+                "txt-lang": "FR",
+                "link-back-proj": "Back to Projects",
+                
+                // Project Content
+                "p-tag": "Intensive Bootcamp",
+                "p-title": "École 42 'Piscine'",
+                "p-date": "July 2025",
+                "p-subtitle-1": "Experience Overview",
+                "p-desc-1": "Completed the 'Piscine' at École 42 Lyon. A 4-week intensive coding bootcamp designed to test resilience, autonomy, and peer-learning capabilities.",
+                "p-subtitle-2": "Activities & Skills",
+                "p-list-1": `
+                    <li>Daily coding modules in C language (low-level programming).</li>
+                    <li>Peer-to-peer evaluations and code reviews.</li>
+                    <li>Weekly exams under strict time constraints (4 to 8 hours).</li>
+                    <li>Weekend team projects (Rush) requiring collaboration and git management.</li>
+                    <li>Developed strong problem-solving skills and algorithmic thinking.</li>
+                `,
+                "p-tech-title": "Technologies",
+                "p-res-title": "Resources",
+                "p-btn-code": "See Code"
+            }
+        };
+
+        // --- LOGIQUE JS ---
+        let currentLang = 'en';
+        let isDark = false;
+
+        // 1. Theme
+        if (localStorage.getItem('theme') === 'dark') {
+            isDark = true;
+            applyTheme();
+        }
+
+        function toggleTheme() {
+            isDark = !isDark;
+            applyTheme();
+        }
+
+        function applyTheme() {
+            const icon = document.getElementById('theme-icon');
+            if (isDark) {
+                document.body.setAttribute('data-theme', 'dark');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.removeAttribute('data-theme');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // 2. Langue
+        function toggleLanguage() {
+            currentLang = currentLang === 'fr' ? 'en' : 'fr';
+            updateProjectTexts();
+        }
+
+        function updateProjectTexts() {
+            const texts = projectTranslations[currentLang];
+            for (const key in texts) {
+                const el = document.getElementById(key);
+                if (el) el.innerHTML = texts[key]; // Utiliser innerHTML pour les listes <li>
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details - Achille Dutel</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="top-header">
+        <div class="brand"><span class="brand-name">Achille Dutel</span></div>
+        <div class="header-tools">
+            <a href="index.html#projets" class="tool-btn">
+                <i class="fas fa-arrow-left"></i> <span id="txt-back">Back</span>
+            </a>
+            <div class="divider"></div>
+            <button class="tool-btn" onclick="toggleLanguage()">
+                <span class="icon">🌍</span> <span id="txt-lang">FR</span>
+            </button>
+            <button class="tool-btn theme-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="project-container">
+
+            <div class="project-hero">
+                <span class="project-tag" id="p-tag">Desktop Application</span>
+                <h1 class="project-title" id="p-title">Delicatessen Order Management</h1>
+                <p class="project-date" id="p-date">May - June 2025</p>
+            </div>
+
+            <div class="project-gallery">
+                <div class="gallery-main">
+                    <img id="mainImage" src="Images/Order App/page-connexion.jpg" alt="Main Preview">
+                </div>
+                <div class="gallery-thumbs">
+        <div class="thumb active" onclick="changeImage(this, 'Images/Order App/page-connexion.jpg')">
+            <img src="Images/Order App/page-connexion.jpg" alt="preview 1">
+        </div>
+
+        <div class="thumb" onclick="changeImage(this, 'Images/Order App/page-commande.jpg')">
+            <img src="Images/Order App/page-commande.jpg" alt="preview 2">
+        </div>
+
+        <div class="thumb" onclick="changeImage(this, 'Images/Order App/page-creation-commande.jpg')">
+            <img src="Images/Order App/page-creation-commande.jpg" alt="preview 3">
+        </div>
+
+        <div class="thumb" onclick="changeImage(this, 'Images/Order App/page-creation-commande-filtrer.jpg')">
+            <img src="Images/Order App/page-creation-commande-filtrer.jpg" alt="preview 4">
+        </div>
+
+        <div class="thumb" onclick="changeImage(this, 'Images/Order App/page-gestion-plats.jpg')">
+            <img src="Images/Order App/page-gestion-plats.jpg" alt="preview 5">
+        </div>
+
+        <div class="thumb" onclick="changeImage(this, 'Images/Order App/page-gestion-plats-manager.jpg')">
+            <img src="Images/Order App/page-gestion-plats-manager.jpg" alt="preview 6">
+        </div>
+
+        <div class="thumb" onclick="changeImage(this, 'Images/Order App/page-client.jpg')">
+            <img src="Images/Order App/page-client.jpg" alt="preview 7">
+        </div>
+
+    </div>
+            </div>
+
+            <div class="project-content-split">
+                <div class="project-main">
+                    <div class="content-block">
+                        <h2 id="p-subtitle-1">Project Overview</h2>
+                        <p id="p-desc-1">Designed and developed a desktop application interface for a delicatessen. The main goal was to streamline order processing and stock management for the business owner.</p>
+                    </div>
+                    <div class="content-block">
+                        <h2 id="p-subtitle-2">Key Features</h2>
+                        <ul id="p-list-1">
+                            <li>Real-time order tracking (ongoing, completed).</li>
+                            <li>Advanced weight management for products sold by weight.</li>
+                            <li>Intuitive WPF/XAML interface for touch screens.</li>
+                            <li>Stock management system with alerts.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="project-sidebar">
+                    <div class="tech-card">
+                        <h3 id="p-tech-title">Technologies</h3>
+                        <div class="tech-list">
+                            <span class="tech-badge">C#</span>
+                            <span class="tech-badge">WPF / XAML</span>
+                            <span class="tech-badge">.NET</span>
+                            <span class="tech-badge">SQL</span>
+                        </div>
+                    </div>
+                    <div class="tech-card mt-30">
+                        <h3 id="p-res-title">Ressources</h3>
+                        <a href="https://github.com/Youpfun/Application-De-Gestion-De-Commande" target="_blank" class="github-project-btn">
+                            <i class="fab fa-github"></i> <span id="p-btn-code">See Code</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content"><p>&copy; 2025 Achille Dutel.</p></div>
+    </footer>
+
+    <script>
+        const projectTranslations = {
+            fr: {
+                "txt-back": "Retour", "txt-lang": "EN", "link-back-proj": "Retour aux projets",
+                "p-tag": "Application Bureau",
+                "p-title": "Gestion Commandes Traiteur",
+                "p-date": "Mai - Juin 2025",
+                "p-subtitle-1": "Aperçu du projet",
+                "p-desc-1": "Conception et développement d'une application de bureau pour un traiteur. L'objectif principal était d'optimiser le traitement des commandes et la gestion des stocks.",
+                "p-subtitle-2": "Fonctionnalités Clés",
+                "p-list-1": `
+                    <li>Suivi des commandes en temps réel (en cours, terminées).</li>
+                    <li>Gestion avancée des produits vendus au poids.</li>
+                    <li>Interface tactile intuitive en WPF/XAML.</li>
+                    <li>Système de gestion des stocks avec alertes.</li>`,
+                "p-tech-title": "Technologies", "p-res-title": "Ressources", "p-btn-code": "Voir le code"
+            },
+            en: {
+                "txt-back": "Back", "txt-lang": "FR", "link-back-proj": "Back to Projects",
+                "p-tag": "Desktop Application",
+                "p-title": "Delicatessen Order Management",
+                "p-date": "May - June 2025",
+                "p-subtitle-1": "Project Overview",
+                "p-desc-1": "Designed and developed a desktop application interface for a delicatessen. The main goal was to streamline order processing and stock management for the business owner.",
+                "p-subtitle-2": "Key Features",
+                "p-list-1": `
+                    <li>Real-time order tracking (ongoing, completed).</li>
+                    <li>Advanced weight management for products sold by weight.</li>
+                    <li>Intuitive WPF/XAML interface for touch screens.</li>
+                    <li>Stock management system with alerts.</li>`,
+                "p-tech-title": "Technologies", "p-res-title": "Resources", "p-btn-code": "See Code"
+            }
+        };
+
+        let currentLang = 'en';
+        let isDark = false;
+
+        if (localStorage.getItem('theme') === 'dark') { isDark = true; applyTheme(); }
+
+        function toggleTheme() { isDark = !isDark; applyTheme(); }
+        function applyTheme() {
+            const icon = document.getElementById('theme-icon');
+            if (isDark) { document.body.setAttribute('data-theme', 'dark'); icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); localStorage.setItem('theme', 'dark'); }
+            else { document.body.removeAttribute('data-theme'); icon.classList.remove('fa-sun'); icon.classList.add('fa-moon'); localStorage.setItem('theme', 'light'); }
+        }
+
+        function toggleLanguage() { currentLang = currentLang === 'fr' ? 'en' : 'fr'; updateProjectTexts(); }
+        function updateProjectTexts() {
+            const texts = projectTranslations[currentLang];
+            for (const key in texts) {
+                const el = document.getElementById(key);
+                if (el) el.innerHTML = texts[key];
+            }
+        }
+
+        function changeImage(element, imageSrc) {
+            const mainImg = document.getElementById('mainImage');
+            mainImg.style.opacity = '0.8';
+            setTimeout(() => { mainImg.src = imageSrc; mainImg.style.opacity = '1'; }, 150);
+            document.querySelectorAll('.thumb').forEach(thumb => thumb.classList.remove('active'));
+            element.classList.add('active');
+        }
+    </script>
+</body>
+</html>
