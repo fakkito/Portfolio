@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>
+    // Script anti-flash : s'exécute avant même l'affichage de la page
+    if (localStorage.getItem('theme') !== 'light') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    }
+</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
-<body>
+<body data-theme="dark">
     <header class="top-header">
         <div class="brand"><span class="brand-name">Achille Dutel</span></div>
         <div class="header-tools">
@@ -146,33 +152,48 @@
             }
         };
 
+        // --- LOGIQUE JS ---
         let currentLang = 'en';
-        let isDark = false;
 
-        if (localStorage.getItem('theme') === 'dark') { isDark = true; applyTheme(); }
+        // --- 1. LOGIQUE THÈME (PRIORITÉ ABSOLUE) ---
+        
+        // On vérifie la mémoire. Si c'est 'light', on passe en false. Sinon true (Dark par défaut).
+        let isDark = localStorage.getItem('theme') === 'light' ? false : true;
 
-        function toggleTheme() { isDark = !isDark; applyTheme(); }
+        // Fonction pour appliquer le thème (appelée au démarrage et au clic)
         function applyTheme() {
             const icon = document.getElementById('theme-icon');
-            if (isDark) { document.body.setAttribute('data-theme', 'dark'); icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); localStorage.setItem('theme', 'dark'); }
-            else { document.body.removeAttribute('data-theme'); icon.classList.remove('fa-sun'); icon.classList.add('fa-moon'); localStorage.setItem('theme', 'light'); }
+            if (isDark) {
+                document.body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                if(icon) { icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); }
+            } else {
+                document.body.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                if(icon) { icon.classList.remove('fa-sun'); icon.classList.add('fa-moon'); }
+            }
         }
 
-        function toggleLanguage() { currentLang = currentLang === 'fr' ? 'en' : 'fr'; updateProjectTexts(); }
+        function toggleTheme() {
+            isDark = !isDark;
+            applyTheme();
+        }
+
+        // Lancer l'application du thème dès que possible
+        applyTheme();
+
+        // 2. Langue
+        function toggleLanguage() {
+            currentLang = currentLang === 'fr' ? 'en' : 'fr';
+            updateProjectTexts();
+        }
+
         function updateProjectTexts() {
             const texts = projectTranslations[currentLang];
             for (const key in texts) {
                 const el = document.getElementById(key);
-                if (el) el.innerHTML = texts[key];
+                if (el) el.innerHTML = texts[key]; // Utiliser innerHTML pour les listes <li>
             }
-        }
-
-        function changeImage(element, imageSrc) {
-            const mainImg = document.getElementById('mainImage');
-            mainImg.style.opacity = '0.8';
-            setTimeout(() => { mainImg.src = imageSrc; mainImg.style.opacity = '1'; }, 150);
-            document.querySelectorAll('.thumb').forEach(thumb => thumb.classList.remove('active'));
-            element.classList.add('active');
         }
     </script>
 </body>

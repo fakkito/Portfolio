@@ -116,8 +116,11 @@ const modalContentFR = `<h4>1. Collecte</h4><p>Données enregistrées : Nom, Ema
 const modalContentEN = `<h4>1. Collection</h4><p>Data recorded: Name, Email, Message.</p><h4>2. Usage</h4><p>Used only to reply to your request.</p><h4>3. Retention</h4><p>3 years maximum.</p>`;
 
 // --- VARIABLES GLOBALES ---
-let currentLang = 'en'; // Anglais par défaut
-let isDark = true;
+let currentLang = 'en';
+
+// 1. On regarde TOUT DE SUITE dans la mémoire
+// Si 'light' est stocké, on démarre en clair. Sinon (null ou 'dark'), on démarre en sombre.
+let isDark = localStorage.getItem('theme') === 'light' ? false : true;
 
 // --- GESTION THÈME ---
 function toggleTheme() {
@@ -127,16 +130,22 @@ function toggleTheme() {
 
 function applyTheme() {
     const icon = document.getElementById('theme-icon');
+    
     if (isDark) {
         document.body.setAttribute('data-theme', 'dark');
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
+        localStorage.setItem('theme', 'dark'); // On sauvegarde
+        if(icon) {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
     } else {
         document.body.removeAttribute('data-theme');
-        icon.classList.remove('fa-sun');
-        icon.classList.add('fa-moon');
+        localStorage.setItem('theme', 'light'); // On sauvegarde
+        if(icon) {
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+        }
     }
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
 }
 
 // --- GESTION LANGUE ---
@@ -161,6 +170,7 @@ function updateTexts() {
 // --- INIT AU CHARGEMENT DE LA PAGE ---
 document.addEventListener('DOMContentLoaded', () => {
     
+    applyTheme();
     // 1. Vérifier le thème (Logique inversée pour Dark par défaut)
     const savedTheme = localStorage.getItem('theme');
     const icon = document.getElementById('theme-icon');
