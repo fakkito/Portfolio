@@ -1,11 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>
-    // Script anti-flash : s'exécute avant même l'affichage de la page
-    if (localStorage.getItem('theme') !== 'light') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-    }
-</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,19 +7,23 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    </script>
 </head>
-<body data-theme="dark">
-    <header class="top-header">
+<body data-theme="dark"> <header class="top-header">
         <div class="brand"><span class="brand-name">Achille Dutel</span></div>
         <div class="header-tools">
             <a href="index.html#projets" class="tool-btn">
                 <i class="fas fa-arrow-left"></i> <span id="txt-back">Back</span>
             </a>
             <div class="divider"></div>
-            <button class="tool-btn" onclick="toggleLanguage()">
+            <button class="tool-btn" onclick="window.toggleProjectLanguage()">
                 <span class="icon">🌍</span> <span id="txt-lang">FR</span>
             </button>
-            <button class="tool-btn theme-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
+            <button class="tool-btn theme-btn" onclick="window.toggleProjectTheme()" aria-label="Toggle Theme">
                 <i class="fas fa-moon" id="theme-icon"></i>
             </button>
         </div>
@@ -42,38 +40,28 @@
 
             <div class="project-gallery">
                 <div class="gallery-main">
-                    <img id="mainImage" src="Images/Order App/page-connexion.jpg" alt="Main Preview">
+                    <img id="mainImage" src="Images/Order_App/page-connexion.jpg" alt="Main Preview">
                 </div>
                 <div class="gallery-thumbs">
-        <div class="thumb active" onclick="changeImage(this, 'Images/Order App/page-connexion.jpg')">
-            <img src="Images/Order App/page-connexion.jpg" alt="preview 1">
-        </div>
-
-        <div class="thumb" onclick="changeImage(this, 'Images/Order App/page-commande.jpg')">
-            <img src="Images/Order App/page-commande.jpg" alt="preview 2">
-        </div>
-
-        <div class="thumb" onclick="changeImage(this, 'Images/Order App/page-creation-commande.jpg')">
-            <img src="Images/Order App/page-creation-commande.jpg" alt="preview 3">
-        </div>
-
-        <div class="thumb" onclick="changeImage(this, 'Images/Order App/page-creation-commande-filtrer.jpg')">
-            <img src="Images/Order App/page-creation-commande-filtrer.jpg" alt="preview 4">
-        </div>
-
-        <div class="thumb" onclick="changeImage(this, 'Images/Order App/page-gestion-plats.jpg')">
-            <img src="Images/Order App/page-gestion-plats.jpg" alt="preview 5">
-        </div>
-
-        <div class="thumb" onclick="changeImage(this, 'Images/Order App/page-gestion-plats-manager.jpg')">
-            <img src="Images/Order App/page-gestion-plats-manager.jpg" alt="preview 6">
-        </div>
-
-        <div class="thumb" onclick="changeImage(this, 'Images/Order App/page-client.jpg')">
-            <img src="Images/Order App/page-client.jpg" alt="preview 7">
-        </div>
-
-    </div>
+                    <div class="thumb active" onclick="window.changeImage(this, 'Images/Order_App/page-connexion.jpg')">
+                        <img src="Images/Order_App/page-connexion.jpg" alt="Login">
+                    </div>
+                    <div class="thumb" onclick="window.changeImage(this, 'Images/Order_App/page-commande.jpg')">
+                        <img src="Images/Order_App/page-commande.jpg" alt="Order">
+                    </div>
+                    <div class="thumb" onclick="window.changeImage(this, 'Images/Order_App/page-creation-commande.jpg')">
+                        <img src="Images/Order_App/page-creation-commande.jpg" alt="Create">
+                    </div>
+                    <div class="thumb" onclick="window.changeImage(this, 'Images/Order_App/page-creation-commande-filtrer.jpg')">
+                        <img src="Images/Order_App/page-creation-commande-filtrer.jpg" alt="Create">
+                    </div>
+                    <div class="thumb" onclick="window.changeImage(this, 'Images/Order_App/page-gestion-plats.jpg')">
+                        <img src="Images/Order_App/page-gestion-plats.jpg" alt="Manage">
+                    </div>
+                    <div class="thumb" onclick="window.changeImage(this, 'Images/Order_App/page-client.jpg')">
+                        <img src="Images/Order_App/page-client.jpg" alt="Client">
+                    </div>
+                </div>
             </div>
 
             <div class="project-content-split">
@@ -119,82 +107,93 @@
     </footer>
 
     <script>
+    // On isole tout le code dans une fonction immédiate pour éviter les conflits
+    (function() {
+        
+        // --- TRADUCTIONS ---
         const projectTranslations = {
             fr: {
-                "txt-back": "Retour", "txt-lang": "EN", "link-back-proj": "Retour aux projets",
+                "txt-back": "Retour", "txt-lang": "EN", 
                 "p-tag": "Application Bureau",
                 "p-title": "Gestion Commandes Traiteur",
                 "p-date": "Mai - Juin 2025",
                 "p-subtitle-1": "Aperçu du projet",
                 "p-desc-1": "Conception et développement d'une application de bureau pour un traiteur. L'objectif principal était d'optimiser le traitement des commandes et la gestion des stocks.",
                 "p-subtitle-2": "Fonctionnalités Clés",
-                "p-list-1": `
-                    <li>Suivi des commandes en temps réel (en cours, terminées).</li>
-                    <li>Gestion avancée des produits vendus au poids.</li>
-                    <li>Interface tactile intuitive en WPF/XAML.</li>
-                    <li>Système de gestion des stocks avec alertes.</li>`,
+                "p-list-1": `<li>Suivi des commandes en temps réel.</li><li>Gestion avancée des produits au poids.</li><li>Interface tactile WPF/XAML.</li><li>Gestion des stocks avec alertes.</li>`,
                 "p-tech-title": "Technologies", "p-res-title": "Ressources", "p-btn-code": "Voir le code"
             },
             en: {
-                "txt-back": "Back", "txt-lang": "FR", "link-back-proj": "Back to Projects",
+                "txt-back": "Back", "txt-lang": "FR",
                 "p-tag": "Desktop Application",
                 "p-title": "Delicatessen Order Management",
                 "p-date": "May - June 2025",
                 "p-subtitle-1": "Project Overview",
-                "p-desc-1": "Designed and developed a desktop application interface for a delicatessen. The main goal was to streamline order processing and stock management for the business owner.",
+                "p-desc-1": "Designed and developed a desktop application interface for a delicatessen. Streamlined order processing and stock management.",
                 "p-subtitle-2": "Key Features",
-                "p-list-1": `
-                    <li>Real-time order tracking (ongoing, completed).</li>
-                    <li>Advanced weight management for products sold by weight.</li>
-                    <li>Intuitive WPF/XAML interface for touch screens.</li>
-                    <li>Stock management system with alerts.</li>`,
+                "p-list-1": `<li>Real-time order tracking.</li><li>Advanced weight management.</li><li>Intuitive WPF/XAML interface.</li><li>Stock management system.</li>`,
                 "p-tech-title": "Technologies", "p-res-title": "Resources", "p-btn-code": "See Code"
             }
         };
 
-        // --- LOGIQUE JS ---
+        // --- ETAT LOCAL ---
         let currentLang = 'en';
-
-        // --- 1. LOGIQUE THÈME (PRIORITÉ ABSOLUE) ---
-        
-        // On vérifie la mémoire. Si c'est 'light', on passe en false. Sinon true (Dark par défaut).
         let isDark = localStorage.getItem('theme') === 'light' ? false : true;
 
-        // Fonction pour appliquer le thème (appelée au démarrage et au clic)
+        // --- FONCTIONS GLOBALES (accessibles par le HTML) ---
+        
+        window.toggleProjectTheme = function() {
+            isDark = !isDark;
+            applyTheme();
+        };
+
+        window.toggleProjectLanguage = function() {
+            currentLang = currentLang === 'fr' ? 'en' : 'fr';
+            updateProjectTexts();
+        };
+
+        window.changeImage = function(element, imageSrc) {
+            const mainImg = document.getElementById('mainImage');
+            if(!mainImg) return;
+            
+            mainImg.style.opacity = '0.8';
+            setTimeout(() => { 
+                mainImg.src = imageSrc; 
+                mainImg.style.opacity = '1'; 
+            }, 150);
+            
+            document.querySelectorAll('.thumb').forEach(thumb => thumb.classList.remove('active'));
+            element.classList.add('active');
+        };
+
+        // --- FONCTIONS INTERNES ---
+
         function applyTheme() {
             const icon = document.getElementById('theme-icon');
             if (isDark) {
-                document.body.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
+                document.documentElement.setAttribute('data-theme', 'dark');
                 if(icon) { icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); }
+                localStorage.setItem('theme', 'dark');
             } else {
-                document.body.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'light');
+                document.documentElement.removeAttribute('data-theme');
                 if(icon) { icon.classList.remove('fa-sun'); icon.classList.add('fa-moon'); }
+                localStorage.setItem('theme', 'light');
             }
-        }
-
-        function toggleTheme() {
-            isDark = !isDark;
-            applyTheme();
-        }
-
-        // Lancer l'application du thème dès que possible
-        applyTheme();
-
-        // 2. Langue
-        function toggleLanguage() {
-            currentLang = currentLang === 'fr' ? 'en' : 'fr';
-            updateProjectTexts();
         }
 
         function updateProjectTexts() {
             const texts = projectTranslations[currentLang];
             for (const key in texts) {
                 const el = document.getElementById(key);
-                if (el) el.innerHTML = texts[key]; // Utiliser innerHTML pour les listes <li>
+                if (el) el.innerHTML = texts[key];
             }
         }
+
+        // --- INIT ---
+        applyTheme();
+        updateProjectTexts();
+
+    })();
     </script>
 </body>
 </html>
