@@ -208,6 +208,7 @@ html { scroll-behavior: smooth; }
 .icon-bg-2 { background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%); } /* Bleu Ciel */
 .icon-bg-3 { background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%); } /* Vert Menthe */
 .icon-bg-4 { background: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%); } /* Orange/Violet */
+.icon-bg-5 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); } /* Bleu/Violet */
 .card-body { padding: 25px; background: var(--card-bg); text-align: center; }
 .card-body h3 { margin-bottom: 8px; font-size: 1.2rem; color: var(--text-main); }
 .card-body p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px; }
@@ -778,6 +779,7 @@ html { scroll-behavior: smooth; }
     }
     .project-title { font-size: 2rem; }
     .project-container {
+        width: 100%;
         padding: 30px 20px;
     }
     .project-hero {
@@ -903,6 +905,7 @@ html { scroll-behavior: smooth; }
 /* L'image principale en grand */
 .gallery-main {
     width: 100%;
+    max-width: 100%;
     height: 450px; /* Hauteur confortable */
     border-radius: 20px;
     overflow: hidden;
@@ -1240,4 +1243,152 @@ html { scroll-behavior: smooth; }
     color: var(--text-muted);
     line-height: 1.6;
     margin-bottom: 40px;
+}
+
+/* --- BANNIÈRES DE PROJET (Sans image) --- */
+
+/* 1. La structure de base (taille, arrondi, centrage) */
+.project-banner-styled {
+    width: 100%;
+    height: 350px;
+    border-radius: 20px;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 6rem;
+    box-shadow: var(--shadow-float);
+    position: relative;
+    overflow: hidden;
+}
+
+/* 2. Le dégradé spécifique pour l'École 42 */
+.gradient-42 {
+    background: linear-gradient(135deg, #fccb90 0%, #d57eeb 100%);
+}
+
+/* (Optionnel) Si tu veux d'autres couleurs pour d'autres projets plus tard */
+.gradient-blue { background: linear-gradient(135deg, #60a5fa 0%, #2563eb 100%); }
+.gradient-green { background: linear-gradient(135deg, #4ade80 0%, #16a34a 100%); }
+
+/* --- CONTROLS CARROUSEL --- */
+.carousel-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 20; /* Pour être cliquable */
+}
+
+.search-box {
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px 20px 10px 40px;
+    border-radius: 30px;
+    border: 1px solid var(--border-light);
+    background: var(--card-bg);
+    color: var(--text-main);
+    font-size: 1rem;
+    box-shadow: var(--shadow-soft);
+    transition: 0.3s;
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.search-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}
+
+.filter-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.tag-btn {
+    padding: 6px 15px;
+    border-radius: 20px;
+    border: 1px solid var(--border-light);
+    background: var(--card-bg);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.tag-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.tag-btn.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); /* Petite ombre brillante */
+    transform: scale(1.05); /* Léger agrandissement */
+}
+
+/* --- MODE GRILLE (Activé lors de la recherche) --- */
+
+/* 1. On transforme le conteneur 3D en Flexbox standard */
+.carousel-wrapper.is-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    height: auto !important; /* La hauteur s'adapte au contenu */
+    transform: none !important; /* On annule la perspective */
+    padding-bottom: 50px;
+}
+
+/* 2. On réinitialise les cartes pour qu'elles soient plates */
+.carousel-wrapper.is-grid .carousel-card {
+    position: relative; /* On enlève le positionnement absolu */
+    left: auto;
+    top: auto;
+    transform: none !important; /* Plus de rotation/scale */
+    opacity: 1 !important;      /* Toujours visible */
+    filter: none !important;    /* Plus de flou */
+    z-index: 1 !important;
+    pointer-events: auto !important;
+    margin: 0;
+    
+    /* Par défaut, on cache tout en mode grille. Le JS affichera les bons. */
+    display: none; 
+}
+
+/* 3. Classe pour afficher les cartes trouvées */
+.carousel-wrapper.is-grid .carousel-card.visible {
+    display: block;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+/* 4. On cache les flèches de navigation en mode recherche */
+.carousel-navigation.hidden {
+    display: none;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }

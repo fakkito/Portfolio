@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
-<body data-theme="dark">
+<body>
 
     <header class="top-header">
         <div class="brand">
@@ -31,11 +31,11 @@
     
         <div class="cv-dropdown" id="cv-menu">
         <a href="CV_Achille_Dutel_FR.pdf" download="CV_Achille_Dutel_FR" class="cv-item">
-            <span class="flag">🇫🇷</span> FR
+            <span class="flag"><img src="Images/Flag/france.png" alt="fr_flag"></span> FR
         </a>
         
         <a href="CV_Achille_Dutel_ENG.pdf" download="CV_Achille_Dutel_ENG" class="cv-item">
-            <span class="flag">🇬🇧</span> EN
+            <span class="flag"><img src="Images/Flag/royaume-uni.png" alt="gb_flag"></span> EN
         </a>
         </div>
         </div>
@@ -91,9 +91,18 @@
 
         <section id="projets" class="view">
             <div class="section-header"><h2 id="title-projects">Mes Projets</h2></div>
+            <div class="carousel-controls">
+                <div class="filter-tags">
+                    <button class="tag-btn" onclick="findProject('web', this)">Web / Laravel</button>
+                    <button class="tag-btn" onclick="findProject('c#', this)">C# / .NET</button>
+                    <button class="tag-btn" onclick="findProject('jeu', this)">2D Game</button>
+                    <button class="tag-btn" onclick="findProject('42', this)">École 42</button>
+                    <button class="tag-btn" onclick="findProject('portfolio', this)">Portfolio</button>
+                </div>
+            </div>
             <div class="carousel-scene">
                 <div class="carousel-wrapper">
-                    <div class="carousel-card active">
+                    <div class="carousel-card active" data-keywords="web laravel php site bdd sql">
                         <a href="in-progress.html" class="card-link">
                             <div class="card-visual icon-bg-1">💻</div>
                             <div class="card-body">
@@ -103,7 +112,17 @@
                             </div>
                         </a>
                     </div>
-                    <div class="carousel-card next">
+                    <div class="carousel-card next" data-keywords="portfolio web html css javascript responsive">
+                        <a href="portfolio.html" class="card-link">
+                            <div class="card-visual icon-bg-5">🌐</div>
+                            <div class="card-body">
+                                <h3 id="proj5-title">Portfolio Personnel</h3>
+                                <p id="proj5-desc">Site vitrine responsive</p>
+                                <span class="link-text" id="link-view-5">Voir le projet &rarr;</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="carousel-card next" data-keywords="c# .net wpf xaml logiciel gestion">
                         <a href="projet-traiteur.html" class="card-link">
                             <div class="card-visual icon-bg-2">🍖</div>
                             <div class="card-body">
@@ -113,7 +132,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="carousel-card">
+                    <div class="carousel-card" data-keywords="jeu game unity c# 2d mario">
                         <a href="projet-jeu.html" class="card-link">
                             <div class="card-visual icon-bg-3">🎮</div>
                             <div class="card-body">
@@ -123,7 +142,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="carousel-card prev">
+                    <div class="carousel-card prev" data-keywords="c ecole 42 algo piscine shell unix">
                         <a href="projet-42.html" class="card-link">
                             <div class="card-visual icon-bg-4"><i class="fas fa-code"></i></div>
                             <div class="card-body">
@@ -137,7 +156,7 @@
                 <div class="carousel-navigation">
                     <button class="nav-arrow" onclick="moveCarousel(-1)">❮</button>
                     <div class="dots-container" id="dotsContainer">
-                        <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
                     </div>
                     <button class="nav-arrow" onclick="moveCarousel(1)">❯</button>
                 </div>
@@ -268,10 +287,10 @@
 
                     <div class="cv-dropdown" id="cv-menu-bottom">
                         <a href="CV_Achille_DUTEL_FR.pdf" download class="cv-item">
-                            <span class="flag">🇫🇷</span> Français
+                            <span class="flag"><img src="Images/Flag/france.png" alt="fr_flag"></span> Français
                         </a>
                         <a href="CV_Achille_DUTEL_ENG.pdf" download class="cv-item">
-                            <span class="flag">🇬🇧</span> English
+                            <span class="flag"><img src="Images/Flag/royaume-uni.png" alt="gb_flag"></span> English
                         </a>
                     </div>
                 </div>

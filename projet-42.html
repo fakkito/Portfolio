@@ -1,11 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>
-    // Script anti-flash : s'exécute avant même l'affichage de la page
-    if (localStorage.getItem('theme') !== 'light') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-    }
-</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
-<body data-theme="dark">
+<body>
     <header class="top-header">
         <div class="brand"><span class="brand-name">Achille Dutel</span></div>
         <div class="header-tools">
@@ -25,9 +19,6 @@
             <div class="divider"></div>
             <button class="tool-btn" onclick="toggleLanguage()">
                 <span class="icon">🌍</span> <span id="txt-lang">FR</span>
-            </button>
-            <button class="tool-btn theme-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
-                <i class="fas fa-moon" id="theme-icon"></i>
             </button>
         </div>
     </header>
@@ -41,7 +32,7 @@
                 <p class="project-date" id="p-date">July 2025</p>
             </div>
 
-            <div class="project-banner" style="background: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%); color: white;">
+            <div class="project-banner-styled gradient-42">
                 <i class="fas fa-code"></i>
             </div>
 
@@ -141,49 +132,99 @@
             }
         };
 
-        // --- LOGIQUE JS ---
-        let currentLang = 'en';
+    // --- ÉTAT LOCAL ---
+    let currentLang = localStorage.getItem('lang') || 'en';    
 
-        // --- 1. LOGIQUE THÈME (PRIORITÉ ABSOLUE) ---
+    let isDark = localStorage.getItem('theme') === 'dark';
+
+    // --- FONCTION D'APPLICATION DU THÈME ---
+    function applyTheme() {
+        const icon = document.getElementById('theme-icon');
         
-        // On vérifie la mémoire. Si c'est 'light', on passe en false. Sinon true (Dark par défaut).
-        let isDark = localStorage.getItem('theme') === 'light' ? false : true;
-
-        // Fonction pour appliquer le thème (appelée au démarrage et au clic)
-        function applyTheme() {
-            const icon = document.getElementById('theme-icon');
-            if (isDark) {
-                document.body.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-                if(icon) { icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); }
-            } else {
-                document.body.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'light');
-                if(icon) { icon.classList.remove('fa-sun'); icon.classList.add('fa-moon'); }
+        if (isDark) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            if(icon) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+            if(icon) {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
             }
         }
+    }
 
-        function toggleTheme() {
-            isDark = !isDark;
-            applyTheme();
-        }
-
-        // Lancer l'application du thème dès que possible
+    // --- FONCTION TOGGLE THÈME ---
+    function toggleTheme() {
+        isDark = !isDark;
         applyTheme();
+    }
 
-        // 2. Langue
-        function toggleLanguage() {
-            currentLang = currentLang === 'fr' ? 'en' : 'fr';
-            updateProjectTexts();
+    /// --- FONCTION TOGGLE LANGUE ---
+    function toggleLanguage() {
+        currentLang = currentLang === 'fr' ? 'en' : 'fr';
+        
+        // AJOUT : On sauvegarde le nouveau choix pour les autres pages
+        localStorage.setItem('lang', currentLang);
+        
+        updateProjectTexts();
+    }
+
+   // --- FONCTION DE MISE À JOUR DES TEXTES ---
+   function updateProjectTexts() {
+        const texts = projectTranslations[currentLang];
+        
+        // Mise à jour des textes de contenu
+        for (const key in texts) {
+            const el = document.getElementById(key);
+            if (el) el.innerHTML = texts[key];
         }
 
-        function updateProjectTexts() {
-            const texts = projectTranslations[currentLang];
-            for (const key in texts) {
-                const el = document.getElementById(key);
-                if (el) el.innerHTML = texts[key]; // Utiliser innerHTML pour les listes <li>
-            }
+        // AJOUT : Mise à jour du bouton de langue dans le header (s'il existe)
+        const btnLang = document.getElementById('txt-lang');
+        if (btnLang) {
+            // Si on est en FR, le bouton propose de passer en EN, et inversement
+            btnLang.innerText = currentLang === 'fr' ? 'EN' : 'FR';
         }
-    </script>
+    }
+
+    // --- FONCTION CHANGEMENT D'IMAGE (pour galeries) ---
+    window.changeImage = function(element, imageSrc) {
+        const mainImg = document.getElementById('mainImage');
+        if(!mainImg) return;
+        
+        mainImg.style.opacity = '0.8';
+        setTimeout(() => { 
+            mainImg.src = imageSrc; 
+            mainImg.style.opacity = '1'; 
+        }, 150);
+        
+        document.querySelectorAll('.thumb').forEach(thumb => thumb.classList.remove('active'));
+        element.classList.add('active');
+    };
+
+    // --- EXPOSITION DES FONCTIONS GLOBALES ---
+    window.toggleTheme = toggleTheme;
+    window.toggleLanguage = toggleLanguage;
+    window.toggleProjectTheme = toggleTheme; // Alias pour compatibilité
+    window.toggleProjectLanguage = toggleLanguage; // Alias pour compatibilité
+
+    // --- INITIALISATION AU CHARGEMENT ---
+    document.addEventListener('DOMContentLoaded', function() {
+        applyTheme();
+        updateProjectTexts();
+    });
+
+    // Fallback : Si le DOM est déjà chargé
+    if (document.readyState !== 'loading') {
+        applyTheme();
+        updateProjectTexts();
+    }
+
+</script>
 </body>
 </html>

@@ -7,13 +7,9 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <script>
-        if (localStorage.getItem('theme') === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-        }
-    </script>
 </head>
-<body data-theme="dark"> <header class="top-header">
+<body> 
+    <header class="top-header">
         <div class="brand"><span class="brand-name">Achille Dutel</span></div>
         <div class="header-tools">
             <a href="index.html#projets" class="tool-btn">
@@ -22,9 +18,6 @@
             <div class="divider"></div>
             <button class="tool-btn" onclick="window.toggleProjectLanguage()">
                 <span class="icon">🌍</span> <span id="txt-lang">FR</span>
-            </button>
-            <button class="tool-btn theme-btn" onclick="window.toggleProjectTheme()" aria-label="Toggle Theme">
-                <i class="fas fa-moon" id="theme-icon"></i>
             </button>
         </div>
     </header>
@@ -136,63 +129,98 @@
             }
         };
 
-        // --- ETAT LOCAL ---
-        let currentLang = 'en';
-        let isDark = localStorage.getItem('theme') === 'light' ? false : true;
+    // --- ÉTAT LOCAL ---
+    let currentLang = localStorage.getItem('lang') || 'en';    
+    
+    let isDark = localStorage.getItem('theme') === 'dark';
 
-        // --- FONCTIONS GLOBALES (accessibles par le HTML) ---
+    // --- FONCTION D'APPLICATION DU THÈME ---
+    function applyTheme() {
+        const icon = document.getElementById('theme-icon');
         
-        window.toggleProjectTheme = function() {
-            isDark = !isDark;
-            applyTheme();
-        };
-
-        window.toggleProjectLanguage = function() {
-            currentLang = currentLang === 'fr' ? 'en' : 'fr';
-            updateProjectTexts();
-        };
-
-        window.changeImage = function(element, imageSrc) {
-            const mainImg = document.getElementById('mainImage');
-            if(!mainImg) return;
-            
-            mainImg.style.opacity = '0.8';
-            setTimeout(() => { 
-                mainImg.src = imageSrc; 
-                mainImg.style.opacity = '1'; 
-            }, 150);
-            
-            document.querySelectorAll('.thumb').forEach(thumb => thumb.classList.remove('active'));
-            element.classList.add('active');
-        };
-
-        // --- FONCTIONS INTERNES ---
-
-        function applyTheme() {
-            const icon = document.getElementById('theme-icon');
-            if (isDark) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                if(icon) { icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); }
-                localStorage.setItem('theme', 'dark');
-            } else {
-                document.documentElement.removeAttribute('data-theme');
-                if(icon) { icon.classList.remove('fa-sun'); icon.classList.add('fa-moon'); }
-                localStorage.setItem('theme', 'light');
+        if (isDark) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            if(icon) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+            if(icon) {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
             }
         }
+    }
 
-        function updateProjectTexts() {
-            const texts = projectTranslations[currentLang];
-            for (const key in texts) {
-                const el = document.getElementById(key);
-                if (el) el.innerHTML = texts[key];
-            }
+    // --- FONCTION TOGGLE THÈME ---
+    function toggleTheme() {
+        isDark = !isDark;
+        applyTheme();
+    }
+
+    /// --- FONCTION TOGGLE LANGUE ---
+    function toggleLanguage() {
+        currentLang = currentLang === 'fr' ? 'en' : 'fr';
+        
+        // AJOUT : On sauvegarde le nouveau choix pour les autres pages
+        localStorage.setItem('lang', currentLang);
+        
+        updateProjectTexts();
+    }
+
+   // --- FONCTION DE MISE À JOUR DES TEXTES ---
+   function updateProjectTexts() {
+        const texts = projectTranslations[currentLang];
+        
+        // Mise à jour des textes de contenu
+        for (const key in texts) {
+            const el = document.getElementById(key);
+            if (el) el.innerHTML = texts[key];
         }
 
-        // --- INIT ---
+        // AJOUT : Mise à jour du bouton de langue dans le header (s'il existe)
+        const btnLang = document.getElementById('txt-lang');
+        if (btnLang) {
+            // Si on est en FR, le bouton propose de passer en EN, et inversement
+            btnLang.innerText = currentLang === 'fr' ? 'EN' : 'FR';
+        }
+    }
+
+    // --- FONCTION CHANGEMENT D'IMAGE (pour galeries) ---
+    window.changeImage = function(element, imageSrc) {
+        const mainImg = document.getElementById('mainImage');
+        if(!mainImg) return;
+        
+        mainImg.style.opacity = '0.8';
+        setTimeout(() => { 
+            mainImg.src = imageSrc; 
+            mainImg.style.opacity = '1'; 
+        }, 150);
+        
+        document.querySelectorAll('.thumb').forEach(thumb => thumb.classList.remove('active'));
+        element.classList.add('active');
+    };
+
+    // --- EXPOSITION DES FONCTIONS GLOBALES ---
+    window.toggleTheme = toggleTheme;
+    window.toggleLanguage = toggleLanguage;
+    window.toggleProjectTheme = toggleTheme; // Alias pour compatibilité
+    window.toggleProjectLanguage = toggleLanguage; // Alias pour compatibilité
+
+    // --- INITIALISATION AU CHARGEMENT ---
+    document.addEventListener('DOMContentLoaded', function() {
         applyTheme();
         updateProjectTexts();
+    });
 
+    // Fallback : Si le DOM est déjà chargé
+    if (document.readyState !== 'loading') {
+        applyTheme();
+        updateProjectTexts();
+    }
     })();
     </script>
 </body>
