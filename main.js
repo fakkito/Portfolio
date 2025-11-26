@@ -17,7 +17,7 @@ const translations = {
         "btn-hero-projects": "Voir mes projets", "btn-hero-contact": "Me contacter", "btn-view-projects": "Découvrir mes projets",
 
         // --- Projets ---
-        "title-projects": "Mes Réalisations",
+        "title-projects": "Mes Projets",
         "proj1-title": "App Web & BDD", "proj1-desc": "Laravel, Modèles de données, BPMN",
         "proj2-title": "Gestion Commandes", "proj2-desc": "App C# (WPF/XAML) pour traiteur",
         "proj3-title": "Jeu Vidéo 2D", "proj3-desc": "Style Mario Bros (C#, Sprites)",
