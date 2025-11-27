@@ -49,6 +49,15 @@ const translations = {
         "about-p1": "Actuellement étudiant à l'Université USMB d'Annecy. Je suis fiable, constant et doté d'un excellent esprit d'équipe.",
         "about-p2": "Je recherche un stage du 6 mai au 28 juin 2026 pour appliquer mes compétences en développement logiciel et innover.",
 
+        // --- Références ---
+        "title-references": "Références",
+        "ref1-name": "Stephanie VIBRAC",
+        "ref1-position": "Responsable de département, Enseignante en Communication Anglaise",
+        "ref1-location": "Annecy, France",
+        "ref2-name": "Pascal COLIN",
+        "ref2-position": "Professeur Base de données",
+        "ref2-location": "Annecy, France",
+
         // --- Contact ---
         "title-contact": "Contactez-moi",
         "contact-coords": "Mes Réseaux",
@@ -103,6 +112,15 @@ const translations = {
 
         // --- About ---
         "title-about": "About Me", "about-p1": "Currently studying at USMB University of Annecy. I am reliable, consistent, and an excellent team player.", "about-p2": "I am seeking an internship to apply my skills in software development from May 6, 2026, to June 28, 2026.",
+
+        // --- References ---
+        "title-references": "References",
+        "ref1-name": "Stephanie VIBRAC",
+        "ref1-position": "Head of department, Teacher in English Communication",
+        "ref1-location": "Annecy, France",
+        "ref2-name": "Pascal COLIN",
+        "ref2-position": "Database professor",
+        "ref2-location": "Annecy, France",
 
         // --- Contact ---
         "title-contact": "Contact Me", "contact-coords": "My Details",
