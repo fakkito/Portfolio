@@ -146,7 +146,6 @@ button, a {
     border-radius: 50px; 
     border: 1px solid var(--border-light);
     display: flex; 
-    gap: 5px; 
     z-index: 51; 
 }
 
@@ -632,7 +631,7 @@ button, a {
     order: 3; /* En 3ème position */
     margin-top: 5px;
     justify-content: flex-start;
-    overflow-x: auto; /* Scroll horizontal si besoin */
+    overflow-x: hidden; /* Désactive le scroll horizontal, mettre si besoin de scroll */
     padding-bottom: 5px;
 }
     .floating-nav::-webkit-scrollbar { display: none; }
