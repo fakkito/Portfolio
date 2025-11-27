@@ -24,6 +24,8 @@ const translations = {
         "proj4-title": "Piscine École 42", "proj4-desc": "Bootcamp intensif C (4 semaines)",
         "proj5-title": "Portfolio Personnel", "proj5-desc": "Site vitrine HTML/CSS/JS",
         "link-view-1": "Voir le projet →", "link-view-2": "Voir le projet →", "link-view-3": "Voir le projet →", "link-view-4": "Voir le projet →", "link-view-5": "Voir le projet →",
+        "badge-uni": "Projet Universitaire",
+        "badge-pro": "Projet Professionnel",
 
         // --- Compétences ---
         "title-skills": "Mes Compétences",
@@ -90,6 +92,8 @@ const translations = {
         "proj4-title": "42 School Piscine", "proj4-desc": "Intensive C Bootcamp (4 weeks)",
         "proj5-title": "Personal Portfolio", "proj5-desc": "Showcase site HTML/CSS/JS",
         "link-view-1": "View Project →", "link-view-2": "View Project →", "link-view-3": "View Project →", "link-view-4": "View Project →", "link-view-5": "View Project →",
+        "badge-uni": "University Project",
+        "badge-pro": "Professional Project",
 
         // --- Skills ---
         "title-skills": "My Skills",
@@ -178,13 +182,27 @@ function toggleLanguage() {
 
 function updateTexts() {
     const texts = translations[currentLang];
+
+    // 1. Mise à jour standard par ID (Comme avant)
     for (const key in texts) {
         const el = document.getElementById(key);
         if (el) {
             el.innerHTML = texts[key];
         }
     }
-    // AJOUT : Met à jour le texte du bouton (FR/EN) immédiatement
+
+    // 2. MISE À JOUR DES ÉLÉMENTS RÉPÉTITIFS (CLASSES)
+    // On sélectionne TOUS les badges universitaires et on les met à jour
+    document.querySelectorAll('.txt-badge-uni').forEach(el => {
+        el.innerText = texts['badge-uni'];
+    });
+
+    // On sélectionne TOUS les badges professionnels et on les met à jour
+    document.querySelectorAll('.txt-badge-pro').forEach(el => {
+        el.innerText = texts['badge-pro'];
+    });
+
+    // 3. Mises à jour spécifiques (Bouton Langue et Modale)
     const langBtn = document.getElementById('txt-lang');
     if (langBtn) langBtn.innerText = currentLang === 'fr' ? 'EN' : 'FR';
 
