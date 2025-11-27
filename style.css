@@ -434,14 +434,70 @@ button, a {
 .contact-card { background: var(--card-bg); border-radius: 20px; padding: 40px; box-shadow: var(--shadow-soft); border: 1px solid var(--border-light); }
 .info-card { flex: 1; display: flex; flex-direction: column; gap: 30px; }
 .info-card h3 { font-size: 1.5rem; margin-bottom: 10px; color: var(--text-main); }
-.info-row { display: flex; align-items: center; gap: 20px; }
-.info-icon { width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: white; flex-shrink: 0; }
-.brand-gmail { background-color: #ea4335; }
-.brand-linkedin { background-color: #0a66c2; }
+/* =========================================
+   STYLE CONTACT - UPDATE (Style Image)
+   ========================================= */
+
+.info-row {
+    display: flex;
+    align-items: center;
+    gap: 18px; /* Espace optimisé entre l'icône et le texte */
+    margin-bottom: 25px; /* Espace entre les lignes LinkedIn et GitHub */
+}
+
+/* 1. Les Icônes (Carrés arrondis plus grands) */
+.info-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+    color: white;
+}
+
+/* Couleurs des marques */
+.brand-linkedin { background-color: #0a66c2; } 
 .brand-github { background-color: #24292e; }
-.info-text .label { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
-.info-text .value { font-size: 1rem; color: var(--text-main); font-weight: 600; transition: 0.3s; }
-.info-text .value:hover { color: var(--primary-color); }
+
+/* Petit effet au survol */
+.info-row:hover .info-icon {
+    transform: scale(1.05);
+}
+
+/* 2. Le conteneur du texte */
+.info-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.2; /* Rapproche les deux lignes de texte */
+}
+
+/* Ligne du HAUT ("LinkedIn", "GitHub") - Gris et léger */
+.info-text .label {
+    font-size: 1.05rem;    /* Taille lisible */
+    color: #64748b;        /* Gris moyen (Slate) comme sur l'image */
+    font-weight: 500;      /* Poids moyen */
+    margin-bottom: 4px;    /* Petit espace sous le titre */
+    display: block;
+}
+
+/* Ligne du BAS ("View Profile", "View Repos") - Sombre et Gras */
+.info-text .value {
+    font-size: 1rem;    /* Grand et impactant */
+    font-weight: 600;      /* Très gras (Bold) */
+    color: #1e293b;        /* Presque noir (Bleu nuit très foncé) */
+    text-decoration: none; /* Pas de soulignement */
+    letter-spacing: -0.5px; /* Resserrer légèrement les lettres */
+    transition: color 0.2s ease;
+}
+
+/* Changement de couleur discret au survol du lien */
+.info-text .value:hover {
+    color: var(--primary-color);
+}
 .form-card { flex: 1.5; }
 .form-group-block { margin-bottom: 25px; }
 .form-group-block label { display: block; margin-bottom: 8px; color: var(--primary-color); font-weight: 600; font-size: 0.95rem; }
