@@ -498,6 +498,20 @@ button, a {
 .info-text .value:hover {
     color: var(--primary-color);
 }
+[data-theme="dark"] .info-text .label {
+    color: #cbd5e1; /* Gris très clair (presque blanc) */
+}
+
+/* Quand le thème est sombre, on change la couleur du titre (Voir mon profil...) */
+[data-theme="dark"] .info-text .value {
+    color: #ffffff; /* Blanc pur pour une lisibilité maximale */
+}
+
+/* On s'assure que le survol reste visible */
+[data-theme="dark"] .info-text .value:hover {
+    color: var(--primary-color); /* Reprend le bleu du thème au survol */
+}
+
 .form-card { flex: 1.5; }
 .form-group-block { margin-bottom: 25px; }
 .form-group-block label { display: block; margin-bottom: 8px; color: var(--primary-color); font-weight: 600; font-size: 0.95rem; }
