@@ -174,7 +174,6 @@ function applyTheme() {
 function toggleLanguage() {
     currentLang = currentLang === 'fr' ? 'en' : 'fr';
     
-    // AJOUT : On sauvegarde le choix dans la mémoire du navigateur
     localStorage.setItem('lang', currentLang);
     
     updateTexts();
@@ -183,7 +182,6 @@ function toggleLanguage() {
 function updateTexts() {
     const texts = translations[currentLang];
 
-    // 1. Mise à jour standard par ID (Comme avant)
     for (const key in texts) {
         const el = document.getElementById(key);
         if (el) {
@@ -192,17 +190,14 @@ function updateTexts() {
     }
 
     // 2. MISE À JOUR DES ÉLÉMENTS RÉPÉTITIFS (CLASSES)
-    // On sélectionne TOUS les badges universitaires et on les met à jour
     document.querySelectorAll('.txt-badge-uni').forEach(el => {
         el.innerText = texts['badge-uni'];
     });
 
-    // On sélectionne TOUS les badges professionnels et on les met à jour
     document.querySelectorAll('.txt-badge-pro').forEach(el => {
         el.innerText = texts['badge-pro'];
     });
 
-    // 3. Mises à jour spécifiques (Bouton Langue et Modale)
     const langBtn = document.getElementById('txt-lang');
     if (langBtn) langBtn.innerText = currentLang === 'fr' ? 'EN' : 'FR';
 
@@ -212,28 +207,19 @@ function updateTexts() {
 
 // --- INIT AU CHARGEMENT DE LA PAGE ---
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Appliquer le thème sauvegardé (ou clair par défaut)
     applyTheme();
-    
-    // 2. Langue (Applique EN par défaut et met à jour le texte)
     updateTexts();
-
-    // 3. ScrollSpy (Navigation active au scroll)
     initScrollSpy();
-
-    // 4. Carrousel (Si présent)
     if(document.querySelector('.carousel-scene')) initCarousel();
 
     // --- LOGIQUE DE RECHERCHE CARROUSEL ---
 
-// Fonction appelée par les boutons ou la barre de recherche
 function findProject(query) {
     if (!query) return;
     
     query = query.toLowerCase().trim();
     const cards = document.querySelectorAll('.carousel-card');
     
-    // On cherche la première carte qui contient le mot-clé
     let foundIndex = -1;
     
     cards.forEach((card, index) => {
@@ -247,8 +233,6 @@ function findProject(query) {
         // --- LOGIQUE INTELLIGENTE ---
         const titleMatch = title.includes(query);
         const keywordMatch = keywordsArray.some(word => {
-            // Modification : On autorise le "commence par" même pour 1 seule lettre
-            // pour que la recherche soit réactive dès la première frappe.
             return word.toLowerCase().startsWith(query);
         });
 
@@ -262,30 +246,25 @@ function findProject(query) {
         }
     });
 
-    // Si on a trouvé une carte, on fait tourner le carrousel jusqu'à elle
     if (foundIndex !== -1) {
         currentIndex = foundIndex;
-        updateCarouselClasses(); // Fonction existante dans ton code qui met à jour l'affichage
+        updateCarouselClasses(); 
     }
 }
 
-// Écouteur pour la barre de recherche (Frappe en direct)
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('carousel-search');
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
             const val = e.target.value;
             
-            // Si la barre est vide, on ne fait rien (ou on pourrait remettre à zéro)
             if (val.trim() === "") return;
 
-            // ON LANCE LA RECHERCHE DIRECTEMENT (Même pour 1 lettre)
             findProject(val);
         });
     }
 });
 
-// Exposer la fonction pour les boutons HTML onclick="findProject('...')"
 window.findProject = findProject;
 });
 

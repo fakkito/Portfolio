@@ -100,10 +100,8 @@
     </footer>
 
     <script>
-    // On isole tout le code dans une fonction immédiate pour éviter les conflits
     (function() {
         
-        // --- TRADUCTIONS ---
         const projectTranslations = {
             fr: {
                 "txt-back": "Retour", "txt-lang": "EN", 
@@ -165,7 +163,6 @@
     function toggleLanguage() {
         currentLang = currentLang === 'fr' ? 'en' : 'fr';
         
-        // AJOUT : On sauvegarde le nouveau choix pour les autres pages
         localStorage.setItem('lang', currentLang);
         
         updateProjectTexts();
@@ -175,16 +172,13 @@
    function updateProjectTexts() {
         const texts = projectTranslations[currentLang];
         
-        // Mise à jour des textes de contenu
         for (const key in texts) {
             const el = document.getElementById(key);
             if (el) el.innerHTML = texts[key];
         }
 
-        // AJOUT : Mise à jour du bouton de langue dans le header (s'il existe)
         const btnLang = document.getElementById('txt-lang');
         if (btnLang) {
-            // Si on est en FR, le bouton propose de passer en EN, et inversement
             btnLang.innerText = currentLang === 'fr' ? 'EN' : 'FR';
         }
     }
@@ -207,16 +201,15 @@
     // --- EXPOSITION DES FONCTIONS GLOBALES ---
     window.toggleTheme = toggleTheme;
     window.toggleLanguage = toggleLanguage;
-    window.toggleProjectTheme = toggleTheme; // Alias pour compatibilité
-    window.toggleProjectLanguage = toggleLanguage; // Alias pour compatibilité
-
+    window.toggleProjectTheme = toggleTheme; 
+    window.toggleProjectLanguage = toggleLanguage;
+    
     // --- INITIALISATION AU CHARGEMENT ---
     document.addEventListener('DOMContentLoaded', function() {
         applyTheme();
         updateProjectTexts();
     });
 
-    // Fallback : Si le DOM est déjà chargé
     if (document.readyState !== 'loading') {
         applyTheme();
         updateProjectTexts();

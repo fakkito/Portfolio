@@ -78,10 +78,8 @@
 
         // --- 2. RECUPERATION DE LA LANGUE ET DU THEME ---
         
-        // LANGUE : On regarde la mémoire. Si vide -> 'en'.
         let currentLang = localStorage.getItem('lang') || 'en';
         
-        // THEME : On regarde la mémoire. Si vide -> 'dark' (true).
         let isDark = localStorage.getItem('theme') === 'light' ? false : true;
 
         // --- 3. FONCTIONS GLOBALES (Accessibles par le HTML) ---
@@ -92,9 +90,7 @@
         };
 
         window.toggleProjectLanguage = function() {
-            // On inverse la langue
             currentLang = currentLang === 'fr' ? 'en' : 'fr';
-            // IMPORTANT : On sauvegarde le choix pour les autres pages
             localStorage.setItem('lang', currentLang);
             updateProjectTexts();
         };
@@ -127,27 +123,22 @@
         }
 
         function updateProjectTexts() {
-            // Vérification de sécurité
             if (typeof projectTranslations === 'undefined') return;
 
             const texts = projectTranslations[currentLang];
             
-            // 1. Mise à jour des textes
             for (const key in texts) {
                 const el = document.getElementById(key);
                 if (el) el.innerHTML = texts[key];
             }
 
-            // 2. Mise à jour du bouton de langue lui-même
             const langBtn = document.getElementById('txt-lang');
             if (langBtn) {
-                // Si je suis en FR, le bouton doit proposer "EN", et inversement
                 langBtn.innerText = currentLang === 'fr' ? 'EN' : 'FR';
             }
         }
 
         // --- 5. INITIALISATION ---
-        // On lance tout de suite pour que la page s'affiche correctement
         applyTheme();
         updateProjectTexts();
 
