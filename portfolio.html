@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details - Achille Dutel</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="top-header">
+        <div class="brand"><span class="brand-name">Achille Dutel</span></div>
+        <div class="header-tools">
+            <a href="index.html#projets" class="tool-btn">
+                <i class="fas fa-arrow-left"></i> 
+                <span id="txt-back">Back</span>
+            </a>
+            <div class="divider"></div>
+            <button class="tool-btn" onclick="toggleLanguage()">
+                <span class="icon">🌍</span> <span id="txt-lang">FR</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="project-container">
+            
+            <div class="project-hero">
+                <span class="project-tag" id="p-tag">Web Development</span>
+                <h1 class="project-title" id="p-title">Personal Portfolio</h1>
+                <p class="project-date" id="p-date">November 2025</p>
+            </div>
+
+            <div class="project-gallery">
+                <div class="gallery-main">
+                    <img id="mainImage" src="Images/Portfolio/Home-page.png" alt="Main Preview">
+                </div>
+            </div>
+
+            <div class="project-content-split">
+                <div class="project-main">
+                    <div class="content-block">
+                        <h2 id="p-subtitle-1">Project Overview</h2>
+                        <p id="p-desc-1">Designed and developed a modern, responsive portfolio website to showcase my projects and skills. Built with clean HTML, CSS, and JavaScript with a focus on user experience and performance.</p>
+                    </div>
+                    <div class="content-block">
+                        <h2 id="p-subtitle-2">Features & Implementation</h2>
+                        <ul id="p-list-1">
+                            <li>Responsive design that adapts seamlessly to all screen sizes.</li>
+                            <li>Interactive project carousel with search and filter functionality.</li>
+                            <li>Dark/Light theme toggle with localStorage persistence.</li>
+                            <li>Multi-language support (French/English) with dynamic content switching.</li>
+                            <li>Smooth animations and modern CSS Grid/Flexbox layouts.</li>
+                            <li>Contact form integration with Formspree for direct messaging.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="project-sidebar">
+                    <div class="tech-card">
+                        <h3 id="p-tech-title">Technologies</h3>
+                        <div class="tech-list">
+                            <span class="tech-badge">HTML5</span>
+                            <span class="tech-badge">CSS3</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">Responsive Design</span>
+                            <span class="tech-badge">Git</span>
+                        </div>
+                    </div>
+                    <div class="tech-card mt-30">
+                        <h3 id="p-res-title">Resources</h3>
+                        <a href="https://github.com/fakkito/portfolio" target="_blank" class="github-project-btn">
+                            <i class="fab fa-github"></i> <span id="p-btn-code">See Code</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content"><p>&copy; 2025 Achille Dutel.</p></div>
+    </footer>
+    
+    <script>
+        // --- TRADUCTIONS SPECIFIQUES A CE PROJET ---
+        const projectTranslations = {
+            fr: {
+                "txt-back": "Retour",
+                "txt-lang": "EN",
+                "link-back-proj": "Retour aux projets",
+                
+                "p-tag": "Développement Web",
+                "p-title": "Portfolio Personnel",
+                "p-date": "Novembre 2025",
+                "p-subtitle-1": "Aperçu du projet",
+                "p-desc-1": "Conception et développement d'un site portfolio moderne et réactif pour présenter mes projets et compétences. Construit avec du HTML, CSS et JavaScript propres, en mettant l'accent sur l'expérience utilisateur et les performances.",
+                "p-subtitle-2": "Fonctionnalités & Implémentation",
+                "p-list-1": `
+                    <li>Design réactif qui s'adapte parfaitement à toutes les tailles d'écran.</li>
+                    <li>Carrousel de projets interactif avec fonction de recherche et de filtrage.</li>
+                    <li>Basculement de thème sombre/clair avec persistance localStorage.</li>
+                    <li>Support multilingue (français/anglais) avec changement de contenu dynamique.</li>
+                    <li>Animations fluides et mises en page modernes avec CSS Grid/Flexbox.</li>
+                    <li>Intégration du formulaire de contact avec Formspree pour la messagerie directe.</li>
+                `,
+                "p-tech-title": "Technologies",
+                "p-res-title": "Ressources",
+                "p-btn-code": "Voir le code"
+            },
+            en: {
+                "txt-back": "Back",
+                "txt-lang": "FR",
+                "link-back-proj": "Back to Projects",
+                
+                "p-tag": "Web Development",
+                "p-title": "Personal Portfolio",
+                "p-date": "November 2025",
+                "p-subtitle-1": "Project Overview",
+                "p-desc-1": "Designed and developed a modern, responsive portfolio website to showcase my projects and skills. Built with clean HTML, CSS, and JavaScript with a focus on user experience and performance.",
+                "p-subtitle-2": "Features & Implementation",
+                "p-list-1": `
+                    <li>Responsive design that adapts seamlessly to all screen sizes.</li>
+                    <li>Interactive project carousel with search and filter functionality.</li>
+                    <li>Dark/Light theme toggle with localStorage persistence.</li>
+                    <li>Multi-language support (French/English) with dynamic content switching.</li>
+                    <li>Smooth animations and modern CSS Grid/Flexbox layouts.</li>
+                    <li>Contact form integration with Formspree for direct messaging.</li>
+                `,
+                "p-tech-title": "Technologies",
+                "p-res-title": "Resources",
+                "p-btn-code": "See Code"
+            }
+        };
+        
+
+    // --- ÉTAT LOCAL ---
+    let currentLang = localStorage.getItem('lang') || 'en';    
+
+    let isDark = localStorage.getItem('theme') === 'dark';
+
+    // --- FONCTION D'APPLICATION DU THÈME ---
+    function applyTheme() {
+        const icon = document.getElementById('theme-icon');
+        
+        if (isDark) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            if(icon) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+            if(icon) {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+    }
+
+    // --- FONCTION TOGGLE THÈME ---
+    function toggleTheme() {
+        isDark = !isDark;
+        applyTheme();
+    }
+
+    /// --- FONCTION TOGGLE LANGUE ---
+    function toggleLanguage() {
+        currentLang = currentLang === 'fr' ? 'en' : 'fr';
+        
+        localStorage.setItem('lang', currentLang);
+        
+        updateProjectTexts();
+    }
+
+   // --- FONCTION DE MISE À JOUR DES TEXTES ---
+   function updateProjectTexts() {
+        const texts = projectTranslations[currentLang];
+        
+        for (const key in texts) {
+            const el = document.getElementById(key);
+            if (el) el.innerHTML = texts[key];
+        }
+
+        const btnLang = document.getElementById('txt-lang');
+        if (btnLang) {
+            btnLang.innerText = currentLang === 'fr' ? 'EN' : 'FR';
+        }
+    }
+
+    // --- FONCTION CHANGEMENT D'IMAGE (pour galeries) ---
+    window.changeImage = function(element, imageSrc) {
+        const mainImg = document.getElementById('mainImage');
+        if(!mainImg) return;
+        
+        mainImg.style.opacity = '0.8';
+        setTimeout(() => { 
+            mainImg.src = imageSrc; 
+            mainImg.style.opacity = '1'; 
+        }, 150);
+        
+        document.querySelectorAll('.thumb').forEach(thumb => thumb.classList.remove('active'));
+        element.classList.add('active');
+    };
+
+    // --- EXPOSITION DES FONCTIONS GLOBALES ---
+    window.toggleTheme = toggleTheme;
+    window.toggleLanguage = toggleLanguage;
+    window.toggleProjectTheme = toggleTheme; 
+    window.toggleProjectLanguage = toggleLanguage; 
+
+    // --- INITIALISATION AU CHARGEMENT ---
+    document.addEventListener('DOMContentLoaded', function() {
+        applyTheme();
+        updateProjectTexts();
+    });
+
+    if (document.readyState !== 'loading') {
+        applyTheme();
+        updateProjectTexts();
+    }
+
+</script>
+</body>
+</html>

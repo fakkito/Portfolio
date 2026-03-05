@@ -17,12 +17,15 @@ const translations = {
         "btn-hero-projects": "Voir mes projets", "btn-hero-contact": "Me contacter", "btn-view-projects": "Découvrir mes projets",
 
         // --- Projets ---
-        "title-projects": "Mes Réalisations",
+        "title-projects": "Mes Projets",
         "proj1-title": "App Web & BDD", "proj1-desc": "Laravel, Modèles de données, BPMN",
         "proj2-title": "Gestion Commandes", "proj2-desc": "App C# (WPF/XAML) pour traiteur",
         "proj3-title": "Jeu Vidéo 2D", "proj3-desc": "Style Mario Bros (C#, Sprites)",
         "proj4-title": "Piscine École 42", "proj4-desc": "Bootcamp intensif C (4 semaines)",
-        "link-view-1": "Voir le projet →", "link-view-2": "Voir le projet →", "link-view-3": "Voir le projet →", "link-view-4": "Voir le projet →",
+        "proj5-title": "Portfolio Personnel", "proj5-desc": "Site vitrine HTML/CSS/JS",
+        "link-view-1": "Voir le projet →", "link-view-2": "Voir le projet →", "link-view-3": "Voir le projet →", "link-view-4": "Voir le projet →", "link-view-5": "Voir le projet →",
+        "badge-uni": "Projet Universitaire",
+        "badge-pro": "Projet Professionnel",
 
         // --- Compétences ---
         "title-skills": "Mes Compétences",
@@ -47,6 +50,15 @@ const translations = {
         "title-about": "À propos de moi",
         "about-p1": "Actuellement étudiant à l'Université USMB d'Annecy. Je suis fiable, constant et doté d'un excellent esprit d'équipe.",
         "about-p2": "Je recherche un stage du 6 mai au 28 juin 2026 pour appliquer mes compétences en développement logiciel et innover.",
+
+        // --- Références ---
+        "title-references": "Références",
+        "ref1-name": "Stephanie VIBRAC",
+        "ref1-position": "Responsable de département, Enseignante en Communication Anglaise",
+        "ref1-location": "Annecy, France",
+        "ref2-name": "Pascal COLIN",
+        "ref2-position": "Professeur Base de données",
+        "ref2-location": "Annecy, France",
 
         // --- Contact ---
         "title-contact": "Contactez-moi",
@@ -78,7 +90,10 @@ const translations = {
         "proj2-title": "Order Management", "proj2-desc": "C# App (WPF/XAML) for delicatessen",
         "proj3-title": "2D Video Game", "proj3-desc": "Mario Bros type (C#, Sprites)",
         "proj4-title": "42 School Piscine", "proj4-desc": "Intensive C Bootcamp (4 weeks)",
-        "link-view-1": "View Project →", "link-view-2": "View Project →", "link-view-3": "View Project →", "link-view-4": "View Project →",
+        "proj5-title": "Personal Portfolio", "proj5-desc": "Showcase site HTML/CSS/JS",
+        "link-view-1": "View Project →", "link-view-2": "View Project →", "link-view-3": "View Project →", "link-view-4": "View Project →", "link-view-5": "View Project →",
+        "badge-uni": "University Project",
+        "badge-pro": "Professional Project",
 
         // --- Skills ---
         "title-skills": "My Skills",
@@ -102,6 +117,15 @@ const translations = {
         // --- About ---
         "title-about": "About Me", "about-p1": "Currently studying at USMB University of Annecy. I am reliable, consistent, and an excellent team player.", "about-p2": "I am seeking an internship to apply my skills in software development from May 6, 2026, to June 28, 2026.",
 
+        // --- References ---
+        "title-references": "References",
+        "ref1-name": "Stephanie VIBRAC",
+        "ref1-position": "Head of department, Teacher in English Communication",
+        "ref1-location": "Annecy, France",
+        "ref2-name": "Pascal COLIN",
+        "ref2-position": "Database professor",
+        "ref2-location": "Annecy, France",
+
         // --- Contact ---
         "title-contact": "Contact Me", "contact-coords": "My Details",
         "link-linkedin": "View Profile", "link-github": "View Repos",
@@ -116,11 +140,9 @@ const modalContentFR = `<h4>1. Collecte</h4><p>Données enregistrées : Nom, Ema
 const modalContentEN = `<h4>1. Collection</h4><p>Data recorded: Name, Email, Message.</p><h4>2. Usage</h4><p>Used only to reply to your request.</p><h4>3. Retention</h4><p>3 years maximum.</p>`;
 
 // --- VARIABLES GLOBALES ---
-let currentLang = 'en';
+let currentLang = localStorage.getItem('lang') || 'en';
 
-// 1. On regarde TOUT DE SUITE dans la mémoire
-// Si 'light' est stocké, on démarre en clair. Sinon (null ou 'dark'), on démarre en sombre.
-let isDark = localStorage.getItem('theme') === 'light' ? false : true;
+let isDark = localStorage.getItem('theme') === 'dark';
 
 // --- GESTION THÈME ---
 function toggleTheme() {
@@ -133,14 +155,14 @@ function applyTheme() {
     
     if (isDark) {
         document.body.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark'); // On sauvegarde
+        localStorage.setItem('theme', 'dark');
         if(icon) {
             icon.classList.remove('fa-moon');
             icon.classList.add('fa-sun');
         }
     } else {
         document.body.removeAttribute('data-theme');
-        localStorage.setItem('theme', 'light'); // On sauvegarde
+        localStorage.setItem('theme', 'light');
         if(icon) {
             icon.classList.remove('fa-sun');
             icon.classList.add('fa-moon');
@@ -151,57 +173,99 @@ function applyTheme() {
 // --- GESTION LANGUE ---
 function toggleLanguage() {
     currentLang = currentLang === 'fr' ? 'en' : 'fr';
+    
+    localStorage.setItem('lang', currentLang);
+    
     updateTexts();
 }
 
 function updateTexts() {
     const texts = translations[currentLang];
+
     for (const key in texts) {
         const el = document.getElementById(key);
         if (el) {
-            // IMPORTANT : Utiliser innerHTML pour que les <span> fonctionnent (ex: Full Stack en bleu)
             el.innerHTML = texts[key];
         }
     }
+
+    // 2. MISE À JOUR DES ÉLÉMENTS RÉPÉTITIFS (CLASSES)
+    document.querySelectorAll('.txt-badge-uni').forEach(el => {
+        el.innerText = texts['badge-uni'];
+    });
+
+    document.querySelectorAll('.txt-badge-pro').forEach(el => {
+        el.innerText = texts['badge-pro'];
+    });
+
+    const langBtn = document.getElementById('txt-lang');
+    if (langBtn) langBtn.innerText = currentLang === 'fr' ? 'EN' : 'FR';
+
     const modalBody = document.getElementById('modal-content');
     if (modalBody) modalBody.innerHTML = currentLang === 'fr' ? modalContentFR : modalContentEN;
 }
 
 // --- INIT AU CHARGEMENT DE LA PAGE ---
 document.addEventListener('DOMContentLoaded', () => {
-    
     applyTheme();
-    // 1. Vérifier le thème (Logique inversée pour Dark par défaut)
-    const savedTheme = localStorage.getItem('theme');
-    const icon = document.getElementById('theme-icon');
-
-    // Si l'utilisateur a PRÉCÉDEMMENT choisi "light", on force le mode clair
-    if (savedTheme === 'light') {
-        isDark = false;
-        document.body.removeAttribute('data-theme'); // Enlève le mode sombre
-        if(icon) {
-            icon.classList.remove('fa-sun');
-            icon.classList.add('fa-moon');
-        }
-    } 
-    // Sinon (c'est la première visite OU il a choisi dark), on reste en Dark (défini dans le HTML)
-    else {
-        isDark = true;
-        // On s'assure que l'icône est bien un soleil
-        if(icon) {
-            icon.classList.remove('fa-moon');
-            icon.classList.add('fa-sun');
-        }
-    }
-    
-    // 2. Langue (Applique EN par défaut et met à jour le texte)
     updateTexts();
-
-    // 3. ScrollSpy (Navigation active au scroll)
     initScrollSpy();
-
-    // 4. Carrousel (Si présent)
     if(document.querySelector('.carousel-scene')) initCarousel();
+
+    // --- LOGIQUE DE RECHERCHE CARROUSEL ---
+
+function findProject(query) {
+    if (!query) return;
+    
+    query = query.toLowerCase().trim();
+    const cards = document.querySelectorAll('.carousel-card');
+    
+    let foundIndex = -1;
+    
+    cards.forEach((card, index) => {
+        if (foundIndex !== -1) return;
+
+        const rawKeywords = card.getAttribute('data-keywords') || "";
+        const title = card.querySelector('h3').innerText.toLowerCase();
+
+        const keywordsArray = rawKeywords.split(' ');
+
+        // --- LOGIQUE INTELLIGENTE ---
+        const titleMatch = title.includes(query);
+        const keywordMatch = keywordsArray.some(word => {
+            return word.toLowerCase().startsWith(query);
+        });
+
+        if (titleMatch || keywordMatch) {
+            foundIndex = index;
+        }
+        
+        if (foundIndex !== -1) {
+            currentIndex = foundIndex;
+            updateCarouselClasses();
+        }
+    });
+
+    if (foundIndex !== -1) {
+        currentIndex = foundIndex;
+        updateCarouselClasses(); 
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('carousel-search');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const val = e.target.value;
+            
+            if (val.trim() === "") return;
+
+            findProject(val);
+        });
+    }
+});
+
+window.findProject = findProject;
 });
 
 // --- NAVIGATION ---
@@ -225,7 +289,6 @@ function scrollToSection(id) {
     const el = document.getElementById(id);
     if (el) {
         el.scrollIntoView({ behavior: 'smooth' });
-        // Mise à jour manuelle du bouton actif
         document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
         const btn = document.querySelector(`button[onclick="scrollToSection('${id}')"]`);
         if (btn) btn.classList.add('active');
@@ -283,36 +346,27 @@ function configItem(el, cls, z, op) { el.classList.add(cls); el.style.zIndex = z
 
 // --- GESTION DES MENUS DÉROULANTS (HAUT et BAS) ---
 
-// 1. Menu du Haut (Header)
 function toggleCvMenu() { 
     const menu = document.getElementById('cv-menu');
     const wrapper = document.querySelector('.cv-wrapper');
-    
-    // On s'assure que le menu du bas est fermé
     closeCvMenuBottom();
-    
     menu.classList.toggle('active'); 
     wrapper.classList.toggle('open'); 
     event.stopPropagation(); 
 }
 
-// 2. Menu du Bas (Compétences) - C'est cette fonction qui manquait !
 function toggleCvMenuBottom() {
     const menu = document.getElementById('cv-menu-bottom');
     const wrapper = document.querySelector('.cv-wrapper-bottom');
-    
-    // On s'assure que le menu du haut est fermé
     const menuTop = document.getElementById('cv-menu');
     const wrapperTop = document.querySelector('.cv-wrapper');
     if(menuTop) menuTop.classList.remove('active');
     if(wrapperTop) wrapperTop.classList.remove('open');
-
     menu.classList.toggle('active');
     wrapper.classList.toggle('open');
     event.stopPropagation();
 }
 
-// Fonction pour fermer le menu du bas
 function closeCvMenuBottom() {
     const menu = document.getElementById('cv-menu-bottom');
     const wrapper = document.querySelector('.cv-wrapper-bottom');
@@ -320,17 +374,13 @@ function closeCvMenuBottom() {
     if (wrapper) wrapper.classList.remove('open');
 }
 
-// Gestionnaire de clics global (pour fermer les menus si on clique ailleurs)
 window.addEventListener('click', (e) => {
-    // Fermer menu Haut
     const mTop = document.getElementById('cv-menu'); 
     const bTop = document.getElementById('btn-cv-trigger');
     if (mTop && mTop.classList.contains('active') && !mTop.contains(e.target) && !bTop.contains(e.target)) { 
         mTop.classList.remove('active'); 
         document.querySelector('.cv-wrapper').classList.remove('open'); 
     }
-
-    // Fermer menu Bas
     const mBot = document.getElementById('cv-menu-bottom');
     const bBot = document.getElementById('btn-cv-bottom');
     if (mBot && mBot.classList.contains('active') && !mBot.contains(e.target) && !bBot.contains(e.target)) {
@@ -342,8 +392,7 @@ window.addEventListener('click', (e) => {
 // --- GESTION FORMULAIRE (AJAX + FORMSPREE) ---
 
 async function handleSubmit(event) {
-    event.preventDefault(); // Empêche le rechargement de la page
-    
+    event.preventDefault();
     const form = document.getElementById("contact-form");
     const data = new FormData(form);
     
@@ -357,14 +406,10 @@ async function handleSubmit(event) {
         });
         
         if (response.ok) {
-            // 1. Message de succès
             const msg = currentLang === 'fr' ? "Message envoyé avec succès !" : "Message sent successfully!";
             alert(msg);
-            
-            // 2. VIDER LE FORMULAIRE (C'est ici que ça se passe)
             form.reset(); 
         } else {
-            // Gestion des erreurs (ex: email invalide)
             const errorMsg = currentLang === 'fr' ? "Oups ! Il y a eu un problème." : "Oops! There was a problem.";
             alert(errorMsg);
         }
