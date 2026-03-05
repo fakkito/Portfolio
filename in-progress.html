@@ -1,48 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>
+    // Script anti-flash : s'exécute avant même l'affichage de la page
+    if (localStorage.getItem('theme') !== 'light') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    }
+</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>En Construction - Achille Dutel</title>
+    <title>Project Details - Achille Dutel</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%236366f1'/%3E%3Ctext x='50' y='65' font-family='Inter,Arial,sans-serif' font-size='40' font-weight='bold' fill='white' text-anchor='middle'%3EAD%3C/text%3E%3C/svg%3E">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
-<body>
+<body data-theme="dark">
     <header class="top-header">
         <div class="brand"><span class="brand-name">Achille Dutel</span></div>
         <div class="header-tools">
-            <a href="index.html" class="tool-btn">
-                <i class="fas fa-arrow-left"></i> Back
+            <a href="index.html#projets" class="tool-btn">
+                <i class="fas fa-arrow-left"></i> <span id="txt-back">Back</span>
             </a>
+            <div class="divider"></div>
+            <button class="tool-btn" onclick="toggleLanguage()">
+                <span class="icon">🌍</span> <span id="txt-lang">FR</span>
+            </button>
+            <button class="tool-btn theme-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
         </div>
     </header>
 
     <main class="main-content">
-        <div class="wip-container">
-            <div class="wip-icon">
-                <i class="fas fa-hard-hat"></i>
-            </div>
-            
-            <h1 class="wip-title">Projet en cours de développement</h1>
-            
-            <p class="wip-text">
-                Je suis actuellement en train de peaufiner les détails de ce projet.<br>
-                La documentation complète sera bientôt disponible ici.
-            </p>
+        <div class="project-container">
 
-            <a href="index.html#projets" class="primary-btn">
-                Retour aux projets
-            </a>
+            <div class="project-hero">
+                <span class="project-tag" id="p-tag">GitHub Project</span>
+                <h1 class="project-title" id="p-title">Project Name</h1>
+                <p class="project-date" id="p-date">Date</p>
+            </div>
+
+            <div class="project-gallery">
+                <div class="gallery-main">
+                    <div id="mediaContainer"></div>
+                </div>
+                <div class="gallery-thumbs">
+                    <div class="thumb" onclick="changeMedia(this, 'Images/Website/Reservation video.mp4')">
+                        <img src="Images/Website/Accueil.png" alt="Reservation Video Preview" class="video-thumb">
+                        <i class="fas fa-play" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px;"></i>
+                    </div>
+                    <div class="thumb" onclick="changeMedia(this, 'Images/Website/Destination.png')">
+                        <img src="Images/Website/Destination.png" alt="Destination Preview">
+                    </div>
+                    <div class="thumb" onclick="changeMedia(this, 'Images/Website/Overlay.png')">
+                        <img src="Images/Website/Overlay.png" alt="Overlay Preview">
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-content-split">
+                <div class="project-main">
+                    <div class="content-block">
+                        <h2 id="p-subtitle-1">Project Overview</h2>
+                        <p id="p-desc-1">Development of a dynamic and interactive travel reservation platform. The site offers a seamless user experience to explore destinations, view offer details, and complete online bookings. Project built with a modern technology stack combining Laravel for the backend and JavaScript for a responsive interface.</p>
+                    </div>
+                    <div class="content-block">
+                        <h2 id="p-subtitle-2">Key Features</h2>
+                        <ul id="p-list-1">
+                            <li>Complete reservation system with calendar management and availability tracking.</li>
+                            <li>Interactive multimedia gallery showcasing destinations with images and videos.</li>
+                            <li>Intuitive user interface with dynamic navigation and smooth animations.</li>
+                            <li>Secure payment system and order management.</li>
+                            <li>Responsive design for all device types.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="project-sidebar">
+                    <div class="tech-card">
+                        <h3 id="p-tech-title">Technologies</h3>
+                        <div class="tech-list">
+                            <span class="tech-badge">Laravel</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">PHP</span>
+                            <span class="tech-badge">PostgreSQL</span>
+                            <span class="tech-badge">Tailwind CSS</span>
+                            <span class="tech-badge">Git</span>
+                        </div>
+                    </div>
+                    <div class="tech-card mt-30">
+                        <h3 id="p-res-title">Resources</h3>
+                        <a href="https://github.com/Youpfun/Club-Med-Copy" target="_blank" class="github-project-btn">
+                            <i class="fab fa-github"></i> <span id="p-btn-code">See Code</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </main>
 
     <footer class="site-footer">
         <div class="footer-content"><p>&copy; 2025 Achille Dutel.</p></div>
     </footer>
-
+    
     <script>
-        if(localStorage.getItem('theme') === 'dark') document.body.setAttribute('data-theme', 'dark');
+        // --- TRADUCTIONS SPECIFIQUES A CE PROJET ---
+        const projectTranslations = {
+            fr: {
+                "txt-back": "Retour",
+                "txt-lang": "EN",
+                "link-back-proj": "Retour aux projets",
+                
+                // Contenu du projet
+                "p-tag": "Projet GitHub",
+                "p-title": "Nom du Projet",
+                "p-date": "Date",
+                "p-subtitle-1": "Aperçu du Projet",
+                "p-desc-1": "Développement d'une plateforme de réservation de voyages dynamique et interactive. Le site propose une expérience utilisateur fluide pour explorer des destinations, consulter les détails des offres et effectuer des réservations en ligne. Projet réalisé avec une pile technologique moderne combinant Laravel pour le backend et JavaScript pour une interface réactive.",
+                "p-subtitle-2": "Fonctionnalités Clés",
+                "p-list-1": `
+                    <li>Système de réservation complet avec gestion du calendrier et disponibilités.</li>
+                    <li>Galerie multimedia interactive showcase destinations avec images et vidéos.</li>
+                    <li>Interface utilisateur intuitive avec navigation dynamique et animations.</li>
+                    <li>Système de paiement sécurisé et gestion des commandes.</li>
+                    <li>Design responsive pour tous types d'appareils.</li>
+                `,
+                "p-tech-title": "Technologies",
+                "p-res-title": "Ressources",
+                "p-btn-code": "Voir le code"
+            },
+            en: {
+                "txt-back": "Back",
+                "txt-lang": "FR",
+                "link-back-proj": "Back to Projects",
+                
+                // Project Content
+                "p-tag": "GitHub Project",
+                "p-title": "Project Name",
+                "p-date": "Date",
+                "p-subtitle-1": "Project Overview",
+                "p-desc-1": "Development of a dynamic and interactive travel reservation platform. The site offers a seamless user experience to explore destinations, view offer details, and complete online bookings. Project built with a modern technology stack combining Laravel for the backend and JavaScript for a responsive interface.",
+                "p-subtitle-2": "Key Features",
+                "p-list-1": `
+                    <li>Complete reservation system with calendar management and availability tracking.</li>
+                    <li>Interactive multimedia gallery showcasing destinations with images and videos.</li>
+                    <li>Intuitive user interface with dynamic navigation and smooth animations.</li>
+                    <li>Secure payment system and order management.</li>
+                    <li>Responsive design for all device types.</li>
+                `,
+                "p-tech-title": "Technologies",
+                "p-res-title": "Resources",
+                "p-btn-code": "See Code"
+            }
+        };
+
+        // --- LOGIQUE JS ---
+        let currentLang = 'en';
+
+        // --- 1. LOGIQUE THÈME (PRIORITÉ ABSOLUE) ---
+        
+        // On vérifie la mémoire. Si c'est 'light', on passe en false. Sinon true (Dark par défaut).
+        let isDark = localStorage.getItem('theme') === 'light' ? false : true;
+
+        // Fonction pour appliquer le thème (appelée au démarrage et au clic)
+        function applyTheme() {
+            const icon = document.getElementById('theme-icon');
+            if (isDark) {
+                document.body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                if(icon) { icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); }
+            } else {
+                document.body.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                if(icon) { icon.classList.remove('fa-sun'); icon.classList.add('fa-moon'); }
+            }
+        }
+
+        function toggleTheme() {
+            isDark = !isDark;
+            applyTheme();
+        }
+
+        // Lancer l'application du thème dès que possible
+        applyTheme();
+
+        // 2. Langue
+        function toggleLanguage() {
+            currentLang = currentLang === 'fr' ? 'en' : 'fr';
+            updateProjectTexts();
+        }
+
+        function updateProjectTexts() {
+            const texts = projectTranslations[currentLang];
+            for (const key in texts) {
+                const el = document.getElementById(key);
+                if (el) el.innerHTML = texts[key]; // Utiliser innerHTML pour les listes <li>
+            }
+        }
+
+        // 3. Galerie - Support images et vidéos
+        function changeMedia(thumb, mediaSrc) {
+            const container = document.getElementById('mediaContainer');
+            container.innerHTML = ''; // Vider le conteneur
+            
+            // Détecter le type de fichier
+            const isVideo = mediaSrc.toLowerCase().endsWith('.mp4');
+            
+            if (isVideo) {
+                // Créer un élément vidéo
+                const video = document.createElement('video');
+                video.src = mediaSrc;
+                video.alt = 'Video Preview';
+                video.style.width = '100%';
+                video.style.height = '100%';
+                video.style.objectFit = 'cover';
+                video.controls = true;
+                video.preload = 'metadata';
+                video.autoplay = true;
+                video.muted = true;
+                container.appendChild(video);
+            } else {
+                // Créer un élément image
+                const img = document.createElement('img');
+                img.src = mediaSrc;
+                img.alt = 'Preview';
+                img.style.width = '100%';
+                img.style.height = '100%';
+                img.style.objectFit = 'cover';
+                container.appendChild(img);
+            }
+            
+            // Mettre à jour le thumbnail actif
+            document.querySelectorAll('.gallery-thumbs .thumb').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+        }
+        
+        // Initialiser avec la vidéo de réservation au démarrage
+        window.addEventListener('DOMContentLoaded', function() {
+            const firstThumb = document.querySelector('.gallery-thumbs .thumb:first-child');
+            if (firstThumb) {
+                changeMedia(firstThumb, 'Images/Website/Reservation video.mp4');
+            }
+        });
     </script>
 </body>
 </html>
